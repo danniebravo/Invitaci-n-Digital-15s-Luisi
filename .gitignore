@@ -1,0 +1,12 @@
+# Originales (no se publican)
+fotos luisa/
+musica/
+recursos/
+# Herramientas locales
+.playwright-mcp/
+.vercel
+node_modules/
+.env*
+
+.vercel
+.env*
