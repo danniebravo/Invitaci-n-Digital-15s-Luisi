@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Álbum de recuerdos · XV Luisa María</title>
+  <meta name="description" content="Sube tus fotos de la fiesta de XV años de Luisa María.">
+  <meta name="theme-color" content="#f6dde4">
+  <meta property="og:title" content="Álbum de recuerdos · XV Luisa María">
+  <meta property="og:description" content="Sube tus fotos de la noche del cuento.">
+  <meta property="og:image" content="https://invitacion-digital-xvs-luisa-maria.vercel.app/assets/img/og.jpg">
+  <link rel="icon" href="assets/img/corona-oro.webp" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Miss+Fajardose&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/album.css">
+</head>
+<body class="album-page">
+  <main class="album">
+    <img class="album-cloud album-cloud-l drift-a" src="assets/img/nube-rosa-1.webp" alt="" width="843" height="685">
+    <img class="album-cloud album-cloud-r drift-b" src="assets/img/nube-rosa-2.webp" alt="" width="1000" height="734">
+
+    <img class="album-crown" src="assets/img/corona-oro.webp" alt="" width="900" height="591">
+    <p class="album-lead">XV · Luisa María</p>
+    <h1 class="title">Álbum de recuerdos</h1>
+    <p class="body-text" id="albumIntro">Sube las fotos que tomes esta noche. Cada una se guarda en el álbum de Luisa.</p>
+
+    <!-- Estados: antes / abierto / cerrado / demo -->
+    <div class="album-state" id="stateBefore" hidden>
+      <p class="album-state-title">El álbum se abre el 5 de diciembre</p>
+      <p>Vuelve a esta página el día de la fiesta para compartir tus fotos.</p>
+    </div>
+    <div class="album-state" id="stateClosed" hidden>
+      <p class="album-state-title">El álbum ya cerró</p>
+      <p>¡Gracias por cada recuerdo que compartiste con Luisa!</p>
+    </div>
+
+    <form class="album-form" id="albumForm" hidden>
+      <label class="field">
+        <span>Tu nombre <em>(opcional)</em></span>
+        <input type="text" id="guestName" name="nombre" autocomplete="name" maxlength="40" placeholder="Ej. Tía Carmen…">
+      </label>
+
+      <label class="pick" for="photos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 3 7.2 5H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.2L15 3H9zm3 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+        Elegir o tomar fotos
+      </label>
+      <input class="visually-hidden" type="file" id="photos" name="fotos" accept="image/*" multiple>
+
+      <ul class="queue" id="queue" aria-live="polite"></ul>
+
+      <button class="btn btn-big" id="sendBtn" type="submit" disabled>Subir mis fotos</button>
+      <p class="album-msg" id="albumMsg" role="status" aria-live="polite"></p>
+    </form>
+
+    <p class="album-demo" id="demoNote" hidden>Vista previa: el álbum aún no está conectado a Google Drive.</p>
+    <a class="album-back" href="index.html">Volver a la invitación</a>
+  </main>
+
+  <script src="js/album-config.js"></script>
+  <script src="js/album.js"></script>
+</body>
+</html>

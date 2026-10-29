@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Mis XV Años · Luisa María</title>
   <meta name="description" content="Había una vez… Estás invitado a celebrar los XV años de Luisa María Bravo Basante. Sábado 05 de diciembre de 2026.">
-  <meta name="theme-color" content="#2a1e35">
+  <meta name="theme-color" content="#f6dde4">
   <meta property="og:title" content="Mis XV Años · Luisa María">
   <meta property="og:description" content="Once upon a dream… Sábado 05 de diciembre de 2026 · Finca Don Marcos">
   <meta property="og:image" content="https://invitacion-digital-xvs-luisa-maria.vercel.app/assets/img/og.jpg">
@@ -65,7 +65,8 @@
       </button>
     </div>
 
-    <p class="intro-hint" id="introHint">Toca el sello para abrir tu invitación</p>
+
+    <p class="intro-hint" id="introHint"><img class="hint-wand" src="assets/img/varita.webp" alt="" width="332" height="815">Toca el sello para abrir tu invitación</p>
     <p class="intro-sound">con música</p>
   </div>
 
@@ -73,9 +74,18 @@
   <button class="music" id="music" type="button" aria-label="Pausar música" aria-pressed="true">
     <span class="bars"><i></i><i></i><i></i><i></i></span>
   </button>
-  <audio id="song" preload="none" loop playsinline>
+  <audio id="song" preload="auto" loop playsinline>
     <source src="assets/audio/once-upon-a-dream.m4a" type="audio/mp4">
   </audio>
+
+  <!-- Paloma articulada (plantilla; JS la clona donde haya .dove-slot) -->
+  <template id="doveTpl">
+    <div class="dove-rig" aria-hidden="true">
+      <img class="dw dw-l" src="assets/img/paloma-ala-izq.webp" alt="" width="551" height="434">
+      <img class="dw dw-r" src="assets/img/paloma-ala-der.webp" alt="" width="551" height="434">
+      <img class="db" src="assets/img/paloma-cuerpo.webp" alt="" width="551" height="434">
+    </div>
+  </template>
 
   <main id="app">
 
@@ -87,22 +97,24 @@
         </video>
       </div>
       <div class="hero-sky"></div>
-      <div class="cloud cloud-l" data-par="-50"><img class="drift-a" src="assets/img/cloudA.webp" alt="" width="1200" height="679"></div>
-      <div class="cloud cloud-r" data-par="-80"><img class="drift-b" src="assets/img/cloudB.webp" alt="" width="1200" height="679"></div>
+      <div class="cloud cloud-l" data-par="-50"><img class="drift-a" src="assets/img/nube-rosa-1.webp" alt="" width="843" height="685"></div>
+      <div class="cloud cloud-r" data-par="-80"><img class="drift-b" src="assets/img/nube-rosa-2.webp" alt="" width="1000" height="734"></div>
+      <div class="dove-slot dove-hero" style="--s:.42;--dur:22s;--y:2svh"></div>
 
-      <div class="hero-title" id="heroTitle">
-        <p class="hero-lead split">Mis XV años</p>
-        <h1 class="hero-name split">Luisa María</h1>
-        <p class="hero-surname split">Bravo Basante</p>
-      </div>
-
-      <div class="hero-girl" id="heroGirl">
-        <div class="girl-glow"></div>
-        <img src="assets/img/luisa-gown.webp" alt="Luisa María" width="495" height="1800" fetchpriority="high">
+      <div class="hero-stack">
+        <div class="hero-title" id="heroTitle">
+          <p class="hero-lead split">Mis XV años</p>
+          <h1 class="hero-name split">Luisa María</h1>
+          <p class="hero-surname split">Bravo Basante</p>
+        </div>
+        <div class="hero-girl" id="heroGirl">
+          <div class="girl-glow"></div>
+          <img src="assets/img/luisa-xv.webp" alt="Luisa María con su vestido de quince años y corona" width="1400" height="1635" fetchpriority="high">
+        </div>
       </div>
       <img class="hero-bloom hero-bloom-l" src="assets/img/rama-a.webp" alt="" width="800" height="800">
       <img class="hero-bloom hero-bloom-r" src="assets/img/rama-b.webp" alt="" width="727" height="800">
-      <div class="sparkles" data-count="22"></div>
+      <div class="sparkles" data-count="14"></div>
 
       <div class="scroll-hint" aria-hidden="true">
         <span>Desliza</span>
@@ -110,16 +122,17 @@
       </div>
     </section>
 
+    <div class="cloud-sep cloud-sep-hero" aria-hidden="true"><img src="assets/img/nube-da-2.webp" alt="" width="1600" height="642"></div>
+
     <!-- ============ MENSAJE (PERGAMINO) ============ -->
     <section class="sec msg" id="mensaje">
       <div class="petal-field" data-count="14"></div>
-      <img class="corner corner-tl" src="assets/img/flores-izq.webp" alt="" width="820" height="1000" loading="lazy" decoding="async">
+      <img class="corner corner-tl" src="assets/img/flores-izq.webp" alt="" width="820" height="1000">
 
       <div class="medallion reveal">
-        <div class="medallion-ring">
-          <img src="assets/img/foto-retrato.webp" alt="Retrato de Luisa María" width="1100" height="825" loading="lazy" decoding="async">
-        </div>
-        <img class="medallion-crown" src="assets/img/corona-oro.webp" alt="" width="900" height="591" loading="lazy" decoding="async">
+        <div class="medallion-photo"><img src="assets/img/foto-retrato.webp" alt="Retrato de Luisa María" width="900" height="1170" loading="lazy" decoding="async"></div>
+        <img class="medallion-crown" src="assets/img/corona-oro.webp" alt="" width="900" height="591">
+        <img class="medallion-frame" src="assets/img/marco-oval.webp" alt="" width="900" height="1163">
       </div>
 
       <div class="scroll" id="scroll">
@@ -149,6 +162,7 @@
 
     <!-- ============ GALERÍA ============ -->
     <section class="sec gallery" id="galeria">
+      <img class="story-page" src="assets/img/pagina-cuento.webp" alt="" width="454" height="666">
       <h2 class="title split">Érase una vez… yo</h2>
       <div class="polaroids" id="polaroids">
         <figure class="polaroid" style="--r:-6deg"><img src="assets/img/foto-carrusel.webp" alt="Luisa en el carrusel" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>un sueño en carrusel</figcaption></figure>
@@ -158,12 +172,18 @@
       <p class="swipe-hint">desliza las fotos</p>
     </section>
 
+    <div class="cloud-sep cloud-sep-date" aria-hidden="true"><img src="assets/img/nube-da-2.webp" alt="" width="1600" height="642"></div>
+
     <!-- ============ FECHA + CUENTA REGRESIVA ============ -->
     <section class="sec night date" id="fecha">
-      <div class="stars" data-count="60"></div>
-      <img class="fairy fairy-rosa" src="assets/img/hada-rosa.webp" alt="" width="520" height="486" loading="lazy" decoding="async">
-      <img class="fairy fairy-verde" src="assets/img/hada-verde.webp" alt="" width="520" height="305" loading="lazy" decoding="async">
-      <img class="fairy fairy-azul" src="assets/img/hada-azul.webp" alt="" width="494" height="520" loading="lazy" decoding="async">
+      <video class="date-video" id="dateVideo" muted loop playsinline preload="metadata" poster="assets/img/flores-poster.webp" aria-hidden="true">
+        <source src="assets/video/flores.mp4" type="video/mp4">
+      </video>
+      <div class="date-veil" aria-hidden="true"></div>
+      <div class="stars" data-count="40"></div>
+      <img class="fairy fairy-rosa" src="assets/img/hada-rosa.webp" alt="" width="520" height="486">
+      <img class="fairy fairy-verde" src="assets/img/hada-verde.webp" alt="" width="520" height="305">
+      <img class="fairy fairy-azul" src="assets/img/hada-azul.webp" alt="" width="494" height="520">
 
       <h2 class="title light split">El día del hechizo</h2>
 
@@ -187,8 +207,7 @@
 
     <!-- ============ PADRES ============ -->
     <section class="sec parents" id="familia">
-      <img class="aurora-water reveal" src="assets/img/aurora-acuarela.webp" alt="" width="869" height="1400" loading="lazy" decoding="async">
-      <img class="crown-top reveal" src="assets/img/corona-oro.webp" alt="" width="900" height="591" loading="lazy" decoding="async">
+      <img class="crown-top reveal" src="assets/img/corona-oro.webp" alt="" width="900" height="591">
       <p class="lead reveal">Con la bendición de Dios y el amor de</p>
       <h2 class="title split">Mis papás</h2>
       <div class="names">
@@ -199,11 +218,28 @@
       <svg class="orn reveal"><use href="#i-orn"/></svg>
       <h3 class="subtitle split">y mi hermana</h3>
       <p class="name reveal">Daniela Bravo Basante</p>
+      <img class="aurora-water reveal" src="assets/img/aurora-acuarela.webp" alt="" width="869" height="1400">
+    </section>
+
+    <!-- ============ ONCE UPON A DREAM (BAILE) ============ -->
+    <section class="sec dream" id="sueno">
+      <img class="star-deco star-a" src="assets/img/estrella-1.webp" alt="" width="300" height="383">
+      <img class="star-deco star-b" src="assets/img/estrella-2.webp" alt="" width="300" height="383">
+      <h2 class="title split">Once upon a dream</h2>
+      <div class="dream-frame reveal">
+        <div class="dream-video">
+          <video id="dreamVideo" muted loop playsinline preload="metadata" poster="assets/img/vals-bosque-poster.webp" aria-label="Aurora y el príncipe bailando en el bosque">
+            <source src="assets/video/vals-bosque.mp4" type="video/mp4">
+          </video>
+        </div>
+        <img class="dream-border" src="assets/img/marco-oval.webp" alt="" width="900" height="1163">
+      </div>
+      <p class="lead reveal">“Te conozco, bailé contigo una vez en un sueño…”</p>
     </section>
 
     <!-- ============ ITINERARIO ============ -->
     <section class="sec itin" id="itinerario">
-      <img class="corner corner-tr" src="assets/img/flores-noche-der.webp" alt="" width="538" height="620" loading="lazy" decoding="async">
+      <img class="corner corner-tr" src="assets/img/rama-b.webp" alt="" width="727" height="800">
       <h2 class="title split">El hechizo empieza puntual</h2>
 
       <div class="punctual reveal">
@@ -231,10 +267,11 @@
           <h3>Inicia el protocolo</h3>
           <p>Entrada de la quinceañera. ¡No te lo pierdas!</p>
         </li>
-        <li class="tl-item">
+        <li class="tl-item tl-vals">
           <time>7:30 p.m.</time>
           <h3>El vals</h3>
           <p>Bailaremos juntos “once upon a dream”.</p>
+          <img class="vals-anim" src="assets/img/vals.webp" alt="" width="560" height="421" loading="lazy" decoding="async">
         </li>
         <li class="tl-item">
           <time>8:00 p.m.</time>
@@ -254,9 +291,16 @@
       </ol>
     </section>
 
+    <div class="cloud-sep cloud-sep-place" aria-hidden="true"><img src="assets/img/nube-da-1.webp" alt="" width="1600" height="887"></div>
+
     <!-- ============ RECEPCIÓN ============ -->
     <section class="place" id="recepcion">
-      <div class="place-img"><img id="placeImg" src="assets/img/noche.webp" alt="Valle iluminado por la luna" width="1600" height="686" loading="lazy" decoding="async"></div>
+      <div class="place-img"><img id="placeImg" src="assets/img/cielo-rosa.webp" alt="" width="1600" height="905"></div>
+      <img class="place-castle" src="assets/img/castillo.webp" alt="" width="1000" height="1027">
+      <img class="place-cloud place-cloud-l drift-a" src="assets/img/nube-rosa-1.webp" alt="" width="843" height="685">
+      <img class="place-cloud place-cloud-r drift-b" src="assets/img/nube-rosa-2.webp" alt="" width="1000" height="734">
+      <img class="place-bloom place-bloom-l" src="assets/img/rama-a.webp" alt="" width="800" height="800">
+      <img class="place-bloom place-bloom-r" src="assets/img/rama-b.webp" alt="" width="727" height="800">
       <div class="petals" id="petals"></div>
       <div class="place-card" id="placeCard">
         <h2 class="title">Finca Don Marcos</h2>
@@ -272,11 +316,11 @@
 
     <!-- ============ CÓDIGO DE VESTIMENTA ============ -->
     <section class="sec dress" id="vestimenta">
+      <h2 class="title split">Código de vestimenta</h2>
+      <p class="dress-formal reveal">Formal</p>
       <div class="couple" role="img" aria-label="Silueta de princesa y príncipe"></div>
-      <h2 class="title split">Formal</h2>
-      <p class="lead reveal">Código de vestimenta</p>
       <div class="pink-note reveal">
-        <span class="swatch" aria-hidden="true"><img src="assets/img/ico-mono.webp" alt="" width="492" height="700" loading="lazy" decoding="async"></span>
+        <span class="swatch" aria-hidden="true"><img src="assets/img/ico-mono.webp" alt="" width="400" height="400"></span>
         <p>El color <strong>rosado</strong> está reservado únicamente para la quinceañera.</p>
       </div>
     </section>
@@ -284,8 +328,8 @@
     <!-- ============ LLUVIA DE SOBRES ============ -->
     <section class="sec gifts" id="regalos">
       <div class="envelope-rain" id="envRain" data-count="12"></div>
-      <img class="dove dove-1" src="assets/img/dove.webp" alt="" width="600" height="417" loading="lazy" decoding="async">
-      <img class="dove dove-2" src="assets/img/dove.webp" alt="" width="600" height="417" loading="lazy" decoding="async">
+      <div class="dove-slot dove-gift-1" style="--s:.55;--dur:15s;--y:8%"></div>
+      <div class="dove-slot dove-gift-2" style="--s:.35;--dur:21s;--y:72%;--delay:-7s"></div>
       <h2 class="title split">Lluvia de sobres</h2>
       <div class="mini-env reveal" aria-hidden="true"><span></span></div>
       <p class="body-text reveal">
@@ -304,19 +348,34 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
         Confirmar por WhatsApp
       </a>
+      <img class="rsvp-wand" src="assets/img/varita.webp" alt="" width="332" height="815">
+    </section>
+
+    <!-- ============ ÁLBUM DE RECUERDOS ============ -->
+    <section class="sec memories" id="recuerdos">
+      <h2 class="title split">Comparte tus recuerdos</h2>
+      <p class="body-text reveal">
+        Esa noche encontrarás un código QR en tu mesa. Escanéalo y sube tus fotos:
+        así guardaremos la fiesta desde todas las miradas.
+      </p>
+      <a class="qr-card reveal" href="album.html">
+        <img src="assets/img/qr-album.png" alt="Código QR del álbum de fotos" width="600" height="600">
+        <span>Abierto el 5 y 6 de diciembre</span>
+      </a>
     </section>
 
     <!-- ============ CIERRE ============ -->
     <section class="end" id="fin">
       <div class="stars" data-count="40"></div>
-      <img class="end-cloud end-cloud-l drift-a" src="assets/img/cloudA.webp" alt="" width="1200" height="679" loading="lazy" decoding="async">
-      <img class="end-cloud end-cloud-r drift-b" src="assets/img/cloudB.webp" alt="" width="1200" height="679" loading="lazy" decoding="async">
+      <img class="end-cloud end-cloud-l drift-a" src="assets/img/nube-rosa-1.webp" alt="" width="843" height="685">
+      <img class="end-cloud end-cloud-r drift-b" src="assets/img/nube-rosa-2.webp" alt="" width="1000" height="734">
+      <div class="dove-slot dove-end" style="--s:.6;--dur:17s;--y:30%"></div>
       <div class="end-inner">
-        <img class="end-once reveal" src="assets/img/once-upon-oro.webp" alt="Once upon a time" width="1296" height="1400" loading="lazy" decoding="async">
+        <img class="end-castle reveal" src="assets/img/castillo.webp" alt="Castillo de cuento sobre un libro abierto" width="1000" height="1027">
         <p class="end-text split">…y este cuento continúa contigo.</p>
         <p class="end-sign reveal">Te espero · Luisa María</p>
       </div>
-      <div class="end-tree"><img id="endTree" src="assets/img/tree.webp" alt="" width="900" height="1206" loading="lazy" decoding="async"></div>
+      <div class="end-tree"><img id="endTree" src="assets/img/tree.webp" alt="" width="900" height="1206"></div>
       <footer class="foot">XV · Luisa María · 05.12.2026</footer>
     </section>
   </main>

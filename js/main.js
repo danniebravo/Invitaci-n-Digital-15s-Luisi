@@ -80,12 +80,33 @@
   const musicBtn = $('#music');
   let wantMusic = true;
   const setMusicUI = on => { musicBtn.setAttribute('aria-pressed', on); musicBtn.setAttribute('aria-label', on ? 'Pausar música' : 'Reproducir música'); };
-  const fadeIn = () => {
-    song.volume = 0;
-    const step = () => { if (song.paused) return; song.volume = Math.min(.75, song.volume + .03); if (song.volume < .75) setTimeout(step, 100); };
-    step();
+  // El audio ya viene recortado para que la canción suene desde el segundo 0
+  song.volume = .8;
+  const playSong = () => { song.play().then(() => setMusicUI(true)).catch(() => setMusicUI(false)); };
+
+  /* ---------------- Palomas articuladas ---------------- */
+  const doveTpl = $('#doveTpl');
+  $$('.dove-slot').forEach(slot => slot.appendChild(doveTpl.content.cloneNode(true)));
+
+  /* ---------------- Reintento de imágenes que fallen ---------------- */
+  const retry = img => {
+    if (img.dataset.retried) return;
+    img.dataset.retried = '1';
+    const src = img.getAttribute('src');
+    setTimeout(() => { img.src = src + (src.includes('?') ? '&' : '?') + 'r=' + Date.now(); }, 800);
   };
-  const playSong = () => { song.play().then(() => { fadeIn(); setMusicUI(true); }).catch(() => setMusicUI(false)); };
+  $$('img').forEach(img => {
+    img.addEventListener('error', () => retry(img));
+    if (img.complete && img.naturalWidth === 0 && img.getAttribute('src')) retry(img);
+  });
+
+  /* ---------------- Videos decorativos: solo cuando se ven ---------------- */
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) e.target.play().catch(() => {}); else e.target.pause();
+    }), { rootMargin: '120px' });
+    ['#dateVideo', '#dreamVideo'].forEach(s => { const v = $(s); if (v) io.observe(v); });
+  }
   musicBtn.addEventListener('click', () => {
     if (song.paused) { wantMusic = true; playSong(); } else { wantMusic = false; song.pause(); setMusicUI(false); }
   });
@@ -231,6 +252,10 @@
 
     // Vestimenta
     gsap.from('.couple', { scale: .82, opacity: 0, duration: 1.4, ease: 'power3.out', scrollTrigger: { trigger: '.couple', start: 'top 85%' } });
+
+    // Nubes de transición: se deslizan suave al pasar (parallax)
+    $$('.cloud-sep img').forEach(img => gsap.fromTo(img, { yPercent: -48 }, { yPercent: -72, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
+    gsap.fromTo('.place-castle', { yPercent: 14 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#recepcion', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
     // Cierre: el árbol crece
     gsap.fromTo('#endTree', { yPercent: 45 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#fin', start: 'top bottom', end: 'bottom bottom', scrub: true } });

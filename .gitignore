@@ -10,3 +10,6 @@ node_modules/
 
 .vercel
 .env*
+
+# Salidas temporales de scripts
+tools/_*
