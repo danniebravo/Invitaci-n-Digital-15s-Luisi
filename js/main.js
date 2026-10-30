@@ -244,14 +244,15 @@
     $$('.tl-item').forEach(el => gsap.from(el, { opacity: 0, x: -24, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 86%' } }));
 
     // Recepción
-    gsap.fromTo('#placeImg', { yPercent: -12 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#recepcion', start: 'top bottom', end: 'bottom bottom', scrub: true } });
-    gsap.from('#placeCard', { y: 80, scale: .94, opacity: 0, filter: 'blur(10px)', duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '#recepcion', start: 'top 60%' } });
+    // Libro pop-up: el castillo se despliega hacia arriba desde las páginas
+    gsap.fromTo('.place-castle', { scaleY: .15, scaleX: .7, opacity: 0 }, { scaleY: 1, scaleX: 1, opacity: 1, duration: 1.4, ease: 'back.out(1.5)', scrollTrigger: { trigger: '#popupBook', start: 'top 75%' } });
+    gsap.from('.book-base', { y: 30, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '#popupBook', start: 'top 85%' } });
+    gsap.from('#placeCard', { y: 50, opacity: 0, filter: 'blur(8px)', duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: '#placeCard', start: 'top 88%' } });
 
     // Vestimenta
     gsap.from('.couple', { scale: .82, opacity: 0, duration: 1.4, ease: 'power3.out', scrollTrigger: { trigger: '.couple', start: 'top 85%' } });
 
     // Nubes de transición: se deslizan suave al pasar (parallax)
-    if ($('.place-castle')) gsap.fromTo('.place-castle', { yPercent: 14 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#recepcion', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
     // Cierre: el árbol crece
     gsap.fromTo('#endTree', { yPercent: 45 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#fin', start: 'top bottom', end: 'bottom bottom', scrub: true } });

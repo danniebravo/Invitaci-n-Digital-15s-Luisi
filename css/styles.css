@@ -681,11 +681,110 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 /* Confirma tu asistencia: glorieta con Aurora de fondo */
 .rsvp { position: relative; min-height: 112svh; padding-top: 70px; }
 .rsvp-bg { position: absolute !important; inset: 0; z-index: 0 !important; }
-.rsvp-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 78% 60%; }
+.rsvp-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 40% 75%; }
 .rsvp-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(248, 240, 227, .9) 0%, rgba(248, 240, 227, .72) 38%, rgba(248, 240, 227, .15) 70%, rgba(248, 240, 227, .5) 100%); }
 
 @media (min-width: 761px) {
   .dream-scene { height: 620px; max-width: 900px; margin: 0 auto; }
   .dream-cloud-top { left: 4vw; } .dream-cloud-bottom { right: 4vw; }
 }
-@media (prefers-reduced-motion: reduce) { .flyer, 
+@media (prefers-reduced-motion: reduce) { .flyer, .sky-cloud { animation: none !important; } }
+
+/* ===== Ronda 4 ===== */
+
+/* 1 · Indicador de scroll visible */
+.scroll-hint { gap: 8px; letter-spacing: .08em; text-transform: none; }
+.scroll-hint span { font-family: var(--f-caps); font-size: 12px; font-weight: 600; letter-spacing: .1em; color: #fff; text-align: center; white-space: normal; max-width: 220px; line-height: 1.45;
+  padding: 8px 16px; font-size: 11px !important; border-radius: 18px !important; border-radius: 999px; background: rgba(110, 36, 72, .58); border: 1px solid rgba(255, 230, 240, .45);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-shadow: 0 6px 18px rgba(60, 20, 40, .3); text-shadow: none; }
+.scroll-arrow { width: 30px; height: 30px; color: #fff; filter: drop-shadow(0 2px 6px rgba(60, 20, 40, .7)); animation: bounce 1.6s ease-in-out infinite; }
+@keyframes bounce { 0%, 100% { transform: translateY(0); opacity: .75; } 50% { transform: translateY(8px); opacity: 1; } }
+
+/* 2 · Marco dorado de encaje para la foto */
+.medallion { width: min(68vw, 270px); margin: 30px auto 30px; aspect-ratio: 900 / 1160; }
+.medallion-photo { position: absolute; left: 18.5%; top: 17.6%; width: 63%; height: 65.6%; border-radius: 50%; overflow: hidden;
+  -webkit-mask-image: radial-gradient(closest-side, #000 86%, transparent 100%); mask-image: radial-gradient(closest-side, #000 86%, transparent 100%); }
+.medallion-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%; }
+.medallion-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+  filter: drop-shadow(0 0 14px rgba(233, 207, 138, .55)) drop-shadow(0 14px 22px rgba(120, 60, 80, .22)); }
+
+/* 4 · Etiquetas en serif mayúsculas, nombres en script */
+.label-caps { font-family: var(--f-caps); font-weight: 500; font-size: 13px; line-height: 1.6; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-3); text-align: center; max-width: 30ch; margin: 0 auto 8px; }
+.label-head { font-size: 17px; font-weight: 600; letter-spacing: 3px; color: var(--rose); margin: 4px auto 14px; }
+.parents h3.label-caps { margin-top: 4px; color: var(--rose); font-size: 14px; }
+
+/* 5 · Once upon a dream: nubes rosadas a todo el ancho arriba y abajo */
+.dream-scene { overflow: visible; }
+.cloud-band { position: absolute !important; left: -30%; width: 160%; max-width: none; height: auto; pointer-events: none; z-index: 3 !important;
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%); mask-image: linear-gradient(to bottom, #000 62%, transparent 100%); }
+@media (min-width: 761px) { .cloud-band { left: -5%; width: 110%; } }
+.dream .cloud-band { opacity: .9; }
+.cloud-band-top { top: -2px; transform: scaleY(-1); }
+.cloud-band-bottom { bottom: -2px; }
+.dream .cloud-band-top { top: -4%; }
+.dream .cloud-band-bottom { bottom: -6%; }
+.dream .title { position: relative; z-index: 5; }
+.dream .lead { position: relative; z-index: 5; margin-top: 26px; }
+
+/* 6 · Logística unificada con libro pop-up */
+.itin .place { position: relative; min-height: 0; display: block; padding: 40px 0 0; background: none; overflow: visible; }
+.popup-book { position: relative; width: min(94vw, 480px); margin: 0 auto; }
+.popup-book .petals { position: absolute; inset: -20% -10% 30%; z-index: 3; }
+.itin .place-castle { position: relative; display: block; width: 80%; margin: 0 auto -33%; z-index: 2; opacity: 1;
+  transform-origin: 50% 74%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 75%); mask-image: linear-gradient(to bottom, #000 60%, transparent 75%);
+  filter: drop-shadow(0 12px 18px rgba(160, 80, 110, .25)); }
+.book-base { position: relative; display: block; width: 100%; z-index: 1; filter: drop-shadow(0 16px 20px rgba(150, 90, 70, .18)); }
+.itin .place-card { position: relative; left: auto; top: auto; transform: none; width: min(460px, 100%); margin: 6px auto 0; padding: 24px 18px 26px;
+  background: linear-gradient(180deg, #fff 0%, #fff6f8 100%); border: 1.5px solid var(--rose-soft);
+  -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 18px 40px rgba(201, 86, 122, .16); }
+.place-time { margin-bottom: 20px; }
+.btn-ghost { display: inline-block; margin-top: 14px; font-family: var(--f-caps); font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--rose); text-decoration: underline; text-underline-offset: 4px; }
+
+/* 7 · Código de vestimenta */
+.dress-title { font-size: clamp(18px, 5.4vw, 24px); font-weight: 600; letter-spacing: 3px; color: var(--ink); max-width: none; margin-bottom: 10px; }
+.pink-note p { font-family: var(--f-body); font-weight: 500; font-size: 19px; line-height: 1.4; color: #4a3a35; }
+
+/* 8 · Lluvia de sobres: nubes blancas a todo el ancho + vuelo suave */
+.gifts { padding-bottom: 150px; }
+.gifts .gifts-band { opacity: .95; z-index: 1 !important; }
+.gifts .cloud-band-top { top: -4px; }
+.gifts .cloud-band-bottom { bottom: -4px; }
+.gifts .doves-sky { z-index: 2; }
+.gifts .title, .gifts .body-text { z-index: 4; }
+.envelope-rain { z-index: 2 !important; }
+@supports (offset-path: path("M0 0 L1 1")) {
+  @media (max-width: 760px) {
+    .flyer { left: 0; top: 0; offset-rotate: 0deg; offset-anchor: center; }
+    .flyer-1 { offset-path: path("M -120 70 C 40 10, 140 120, 230 60 S 380 0, 520 50"); animation: flyPath 16s cubic-bezier(.45, .05, .55, .95) infinite, flap 1.1s ease-in-out infinite; }
+    .flyer-2 { offset-path: path("M -140 150 C 20 90, 120 190, 220 130 S 400 80, 540 140"); animation: flyPath 20s cubic-bezier(.45, .05, .55, .95) infinite -7s, flap 1.3s ease-in-out infinite -.3s; }
+    .flyer-3 { offset-path: path("M -130 40 C 60 100, 150 -10, 260 40 S 420 110, 540 30"); animation: flyPath 23s cubic-bezier(.45, .05, .55, .95) infinite -14s, flap 1s ease-in-out infinite -.6s; }
+  }
+}
+@keyframes flyPath {
+  0%   { offset-distance: 0%;   transform: rotate(4deg) scale(.92); }
+  25%  { transform: rotate(-5deg) scale(1.02); }
+  50%  { transform: rotate(3deg) scale(.96); }
+  75%  { transform: rotate(-6deg) scale(1.05); }
+  100% { offset-distance: 100%; transform: rotate(2deg) scale(.94); }
+}
+
+/* 9 · Confirma: tarjeta flotante translúcida sobre la ilustración */
+.rsvp { display: flex; flex-direction: column; align-items: center; padding-top: 56px; }
+.rsvp-bg::after { background: linear-gradient(180deg, rgba(248, 240, 227, .35) 0%, rgba(248, 240, 227, 0) 45%, rgba(248, 240, 227, 0) 85%, rgba(248, 240, 227, .4) 100%); }
+.rsvp-card { position: relative; z-index: 2; width: min(340px, 100%); padding: 26px 20px 28px; text-align: center; border-radius: 20px;
+  background: rgba(255, 255, 255, .85); border: 1px solid rgba(255, 255, 255, .9);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 20px 44px rgba(120, 60, 80, .2); }
+.rsvp-card .title { font-size: clamp(40px, 11vw, 56px); margin: 0 0 8px; }
+.rsvp-card .lead { margin-bottom: 8px; }
+.rsvp-card .body-text { font-size: 18px; margin-bottom: 18px; }
+.rsvp-card .btn-big { width: 100%; padding: 0 16px; font-size: 12.5px; }
+
+@media (prefers-reduced-motion: reduce) { .scroll-arrow { animation: none; } }
+@media (min-width: 761px) {
+  .dream .cloud-band { left: 50%; width: 100vw; height: 200px; object-fit: cover; object-position: 50% 0%; }
+  .dream .cloud-band-top { top: -40px; transform: translateX(-50%) scaleY(-1); }
+  .dream .cloud-band-bottom { bottom: -50px; transform: translateX(-50%); }
+  .gifts .cloud-band { left: 0; width: 100%; height: 220px; object-fit: cover; object-position: 50% 0%; }
+}
