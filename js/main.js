@@ -255,7 +255,7 @@
 
     // Nubes de transición: se deslizan suave al pasar (parallax)
     $$('.cloud-sep img').forEach(img => gsap.fromTo(img, { yPercent: -48 }, { yPercent: -72, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
-    gsap.fromTo('.place-castle', { yPercent: 14 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#recepcion', start: 'top bottom', end: 'bottom bottom', scrub: true } });
+    if ($('.place-castle')) gsap.fromTo('.place-castle', { yPercent: 14 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#recepcion', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
     // Cierre: el árbol crece
     gsap.fromTo('#endTree', { yPercent: 45 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#fin', start: 'top bottom', end: 'bottom bottom', scrub: true } });
