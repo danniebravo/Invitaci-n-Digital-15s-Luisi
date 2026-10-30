@@ -84,9 +84,6 @@
   song.volume = .8;
   const playSong = () => { song.play().then(() => setMusicUI(true)).catch(() => setMusicUI(false)); };
 
-  /* ---------------- Palomas articuladas ---------------- */
-  const doveTpl = $('#doveTpl');
-  $$('.dove-slot').forEach(slot => slot.appendChild(doveTpl.content.cloneNode(true)));
 
   /* ---------------- Reintento de imágenes que fallen ---------------- */
   const retry = img => {
@@ -254,7 +251,6 @@
     gsap.from('.couple', { scale: .82, opacity: 0, duration: 1.4, ease: 'power3.out', scrollTrigger: { trigger: '.couple', start: 'top 85%' } });
 
     // Nubes de transición: se deslizan suave al pasar (parallax)
-    $$('.cloud-sep img').forEach(img => gsap.fromTo(img, { yPercent: -48 }, { yPercent: -72, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
     if ($('.place-castle')) gsap.fromTo('.place-castle', { yPercent: 14 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#recepcion', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
     // Cierre: el árbol crece

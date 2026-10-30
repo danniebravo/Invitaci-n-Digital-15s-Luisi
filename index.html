@@ -21,7 +21,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Miss+Fajardose&family=Pinyon+Script&display=swap" rel="stylesheet">
 
   <link rel="preload" href="assets/img/valle-poster.webp" as="image">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=7">
 </head>
 <body class="is-locked">
 
@@ -66,7 +66,7 @@
     </div>
 
 
-    <p class="intro-hint" id="introHint"><img class="hint-wand" src="assets/img/varita.webp" alt="" width="332" height="815">Toca el sello para abrir tu invitación</p>
+    <div class="intro-hint-row" id="introHint"><img class="hint-wand" src="assets/img/varita-linea.png" alt="" width="299" height="382"><p class="intro-hint">Toca el sello para abrir tu invitación</p></div>
     <p class="intro-sound">con música</p>
   </div>
 
@@ -77,15 +77,6 @@
   <audio id="song" preload="auto" loop playsinline>
     <source src="assets/audio/once-upon-a-dream.m4a" type="audio/mp4">
   </audio>
-
-  <!-- Paloma articulada (plantilla; JS la clona donde haya .dove-slot) -->
-  <template id="doveTpl">
-    <div class="dove-rig" aria-hidden="true">
-      <img class="dw dw-l" src="assets/img/paloma-ala-izq.webp" alt="" width="551" height="434">
-      <img class="dw dw-r" src="assets/img/paloma-ala-der.webp" alt="" width="551" height="434">
-      <img class="db" src="assets/img/paloma-cuerpo.webp" alt="" width="551" height="434">
-    </div>
-  </template>
 
   <main id="app">
 
@@ -121,17 +112,16 @@
       </div>
     </section>
 
-    <div class="cloud-sep cloud-sep-hero" aria-hidden="true"><img src="assets/img/nube-da-2.webp" alt="" width="1600" height="642"></div>
-
     <!-- ============ MENSAJE (PERGAMINO) ============ -->
     <section class="sec msg" id="mensaje">
       <div class="petal-field" data-count="14"></div>
       <img class="corner corner-tl" src="assets/img/flores-izq.webp" alt="" width="820" height="1000">
 
       <div class="medallion reveal">
-        <div class="medallion-photo"><img src="assets/img/foto-retrato.webp" alt="Retrato de Luisa María" width="900" height="1170" loading="lazy" decoding="async"></div>
+        <div class="medallion-ring">
+          <img src="assets/img/foto-retrato.webp" alt="Retrato de Luisa María" width="900" height="1170" loading="lazy" decoding="async">
+        </div>
         <img class="medallion-crown" src="assets/img/corona-oro.webp" alt="" width="900" height="591">
-        <img class="medallion-frame" src="assets/img/marco-oval.webp" alt="" width="900" height="1163">
       </div>
 
       <div class="scroll" id="scroll">
@@ -161,7 +151,6 @@
 
     <!-- ============ GALERÍA ============ -->
     <section class="sec gallery" id="galeria">
-      <img class="story-page" src="assets/img/pagina-cuento.webp" alt="" width="454" height="666">
       <h2 class="title split">Érase una vez… yo</h2>
       <div class="polaroids" id="polaroids">
         <figure class="polaroid" style="--r:-6deg"><img src="assets/img/foto-carrusel.webp" alt="Luisa en el carrusel" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>un sueño en carrusel</figcaption></figure>
@@ -204,6 +193,7 @@
 
     <!-- ============ PADRES ============ -->
     <section class="sec parents" id="familia">
+      <img class="crown-top reveal" src="assets/img/corona-oro.webp" alt="" width="900" height="591">
       <p class="lead reveal">Con la bendición de Dios y el amor de</p>
       <h2 class="title split">Mis papás</h2>
       <div class="names">
@@ -222,12 +212,12 @@
       <img class="star-deco star-a" src="assets/img/estrella-1.webp" alt="" width="300" height="383">
       <img class="star-deco star-b" src="assets/img/estrella-2.webp" alt="" width="300" height="383">
       <h2 class="title split">Once upon a dream</h2>
-      <div class="dream-frame reveal">
-        <div class="dream-video">
-          <video id="dreamVideo" muted loop playsinline preload="metadata" poster="assets/img/vals-bosque-poster.webp" aria-label="Aurora y el príncipe bailando en el bosque">
-            <source src="assets/video/vals-bosque.mp4" type="video/mp4">
-          </video>
-        </div>
+      <div class="dream-scene">
+        <img class="dream-cloud dream-cloud-top drift-a" src="assets/img/nube-rosa-1.webp" alt="" width="843" height="685">
+        <video id="dreamVideo" muted loop playsinline preload="metadata" poster="assets/img/vals-bosque-poster.webp" aria-label="Aurora y el príncipe bailando en el bosque">
+          <source src="assets/video/vals-bosque.mp4" type="video/mp4">
+        </video>
+        <img class="dream-cloud dream-cloud-bottom drift-b" src="assets/img/nube-rosa-2.webp" alt="" width="1000" height="734">
       </div>
       <p class="lead reveal">“Te conozco, bailé contigo una vez en un sueño…”</p>
     </section>
@@ -285,8 +275,6 @@
       </ol>
     </section>
 
-    <div class="cloud-sep cloud-sep-place" aria-hidden="true"><img src="assets/img/nube-da-1.webp" alt="" width="1600" height="887"></div>
-
     <!-- ============ RECEPCIÓN ============ -->
     <section class="place" id="recepcion">
       <div class="place-img"><img id="placeImg" src="assets/img/cielo-rosa.webp" alt="" width="1600" height="905"></div>
@@ -310,7 +298,7 @@
       <p class="dress-formal reveal">Formal</p>
       <div class="couple" role="img" aria-label="Silueta de princesa y príncipe"></div>
       <div class="pink-note reveal">
-        <span class="swatch" aria-hidden="true"><img src="assets/img/ico-mono.webp" alt="" width="400" height="400"></span>
+        <span class="swatch" aria-hidden="true"><span class="swatch-rose"></span></span>
         <p>El color <strong>rosado</strong> está reservado únicamente para la quinceañera.</p>
       </div>
     </section>
@@ -318,10 +306,13 @@
     <!-- ============ LLUVIA DE SOBRES ============ -->
     <section class="sec gifts" id="regalos">
       <div class="envelope-rain" id="envRain" data-count="12"></div>
-      <div class="dove-slot dove-gift-1" style="--s:.55;--dur:15s;--y:8%"></div>
-      <div class="dove-slot dove-gift-2" style="--s:.35;--dur:21s;--y:72%;--delay:-7s"></div>
+      <div class="doves-sky" aria-hidden="true">
+        <img class="flyer flyer-1" src="assets/img/pal-1.webp" alt="" width="404" height="226">
+        <img class="flyer flyer-2" src="assets/img/pal-2.webp" alt="" width="420" height="244">
+        <img class="flyer flyer-3" src="assets/img/pal-3.webp" alt="" width="420" height="331">
+        <img class="sky-cloud sky-cloud-1" src="assets/img/nube-blanca.webp" alt="" width="900" height="509">
+      </div>
       <h2 class="title split">Lluvia de sobres</h2>
-      <div class="mini-env reveal" aria-hidden="true"><span></span></div>
       <p class="body-text reveal">
         Tu presencia es el regalo más bonito de mi cuento.
         Si deseas tener un detalle conmigo, habrá una lluvia de sobres esa noche.
@@ -330,7 +321,7 @@
 
     <!-- ============ CONFIRMACIÓN ============ -->
     <section class="sec rsvp" id="confirmar">
-      <div class="sil-aurora reveal" aria-hidden="true"></div>
+      <div class="rsvp-bg" aria-hidden="true"><img src="assets/img/glorieta-aurora.webp" alt="" width="988" height="1480" loading="lazy" decoding="async"></div>
       <h2 class="title split">Confirma tu asistencia</h2>
       <p class="lead reveal">¿Vendrás al reino?</p>
       <p class="body-text reveal">Tu respuesta me ayuda a preparar cada detalle de esta noche mágica.</p>
@@ -371,6 +362,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=3"></script>
 </body>
 </html>
