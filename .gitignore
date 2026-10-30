@@ -13,3 +13,4 @@ node_modules/
 
 # Salidas temporales de scripts
 tools/_*
+.clasp.json
