@@ -245,8 +245,12 @@
 
     // Recepción
     // Libro pop-up: el castillo se despliega hacia arriba desde las páginas
-    gsap.fromTo('.place-castle', { scaleY: .15, scaleX: .7, opacity: 0 }, { scaleY: 1, scaleX: 1, opacity: 1, duration: 1.4, ease: 'back.out(1.5)', scrollTrigger: { trigger: '#popupBook', start: 'top 75%' } });
-    gsap.from('.book-base', { y: 30, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '#popupBook', start: 'top 85%' } });
+    // Ligado al scroll: al bajar se abre, al subir se vuelve a cerrar
+    gsap.timeline({ scrollTrigger: { trigger: '#popupBook', start: 'top 95%', end: 'top 40%', scrub: .8 } })
+      .fromTo('.book-base', { rotationX: 62, opacity: .6 }, { rotationX: 0, opacity: 1, ease: 'power2.out' }, 0)
+      .fromTo('.place-castle', { scaleY: .08, scaleX: .55, opacity: 0, transformOrigin: '50% 74%' }, { scaleY: 1, scaleX: 1, opacity: 1, ease: 'back.out(1.6)' }, .15);
+    // Abierto, el castillo respira suave
+    gsap.to('.castle-float', { y: -7, duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: -1 });
     gsap.from('#placeCard', { y: 50, opacity: 0, filter: 'blur(8px)', duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: '#placeCard', start: 'top 88%' } });
 
     // Vestimenta
