@@ -852,3 +852,11 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
   background: rgba(40, 12, 32, .38); text-shadow: 0 1px 3px rgba(40, 10, 30, .95), 0 0 12px rgba(40, 10, 30, .7); }
 
 @media (prefers-reduced-motion: reduce) { .dove, .more-arrow, .castle-float { animation: none !important; } }
+
+/* Confirma: botón otra vez arriba con el texto; abajo solo la flecha */
+.rsvp-top .btn-big { width: min(320px, 100%); margin-top: 20px; }
+.rsvp-top .body-text { margin-bottom: 0; }
+.rsvp-bottom { gap: 0; }
+.more-arrow { width: 28px; height: 28px; opacity: .7; filter: drop-shadow(0 0 6px rgba(255, 248, 240, .9)); }
+.rsvp-top .btn-big { width: auto; white-space: nowrap; padding: 0 24px; font-size: 12.5px; }
+.more-arrow { opacity: .85; }
