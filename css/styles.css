@@ -628,8 +628,6 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 /* Varita de línea que apunta al texto */
 .intro-hint-row { position: relative; z-index: 2; display: flex; align-items: center; gap: 6px; max-width: 320px; }
 .intro-hint-row .intro-hint { text-align: left; max-width: 22ch; }
-.hint-wand { flex: none; width: 74px; height: auto; transform: rotate(8deg); filter: drop-shadow(0 0 6px rgba(255, 220, 160, .7)); animation: wand 2.4s ease-in-out infinite; }
-@keyframes wand { 50% { transform: rotate(14deg) translateY(-3px); } }
 
 /* Baile integrado al fondo con nubes arriba y abajo */
 .dream { padding-left: 0; padding-right: 0; overflow: hidden; }
@@ -877,8 +875,6 @@ img { -webkit-user-drag: none; }
 .intro-hint-row .intro-hint, .intro-hint { max-width: none; text-align: center; font-size: 12.5px; font-weight: 600; letter-spacing: .12em; line-height: 1.6;
   text-shadow: 0 1px 6px rgba(40, 12, 30, .8); animation: pulseTextSoft 2.4s ease-in-out infinite; }
 @keyframes pulseTextSoft { 50% { opacity: .8; } }
-.hint-wand { display: inline-block; vertical-align: -.35em; width: auto; height: 1.6em; margin-right: .4em; transform: rotate(8deg);
-  filter: drop-shadow(0 0 3px rgba(255, 220, 160, .6)); animation: none; }
 .intro-sound { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .12em; opacity: .95; margin-top: -12px;
   text-shadow: 0 1px 8px rgba(40, 12, 30, .9); }
 .sound-icon { width: auto; height: 15px; flex: none; filter: drop-shadow(0 1px 4px rgba(40, 12, 30, .7)); }
