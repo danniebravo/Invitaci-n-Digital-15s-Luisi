@@ -898,4 +898,5 @@ img { -webkit-user-drag: none; }
 .w { padding: .28em .12em .2em; margin: -.28em -.12em -.2em; }
 
 /* Guirnalda de cerezo entre el baile y el itinerario */
-.sec-garland { position: absolute; z-index: 6; left: 50%; top: 0; width: min(104vw, 640px); max-width: none; height: auto; transform: translate(-50%, -50%); pointer-events: none; }
+.sec-seam { position: relative; z-index: 7; height: 0; pointer-events: none; }
+.sec-garland { position: absolute; left: 50%; top: 0; width: min(100vw, 640px); max-width: none; height: auto; transform: translate(-50%, -50%); }
