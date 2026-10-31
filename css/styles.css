@@ -893,3 +893,6 @@ img { -webkit-user-drag: none; }
 
 /* "Once upon a dream" separado de las nubes */
 .dream .title { margin-bottom: 48px; }
+
+/* Letras cursivas: que los trazos altos (l, h, b) no se recorten */
+.w { padding: .28em .12em .2em; margin: -.28em -.12em -.2em; }

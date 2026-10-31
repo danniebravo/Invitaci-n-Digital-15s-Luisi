@@ -195,7 +195,7 @@
       .fromTo('#app', { scale: .9, filter: 'blur(6px)', borderRadius: 28 }, { scale: 1, filter: 'blur(0px)', borderRadius: 0, duration: 1.4, ease: 'expo.inOut' }, 2.2)
       .from('.cloud-l', { x: -140, opacity: 0, duration: 1.8 }, 2.6)
       .from('.cloud-r', { x: 140, opacity: 0, duration: 1.8 }, 2.6)
-      .to(heroWords, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.1, stagger: .12 }, 2.9)
+      .to(heroWords, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.1, stagger: .12, clearProps: 'filter,willChange' }, 2.9)
       .to('#heroGirl', { opacity: 1, y: 0, duration: 1.4 }, 3.1)
       .to('.hero-bloom', { opacity: 1, y: 0, duration: 1.4, stagger: .1 }, 3.2);
   };
@@ -215,10 +215,10 @@
 
     // Reveals
     // Entradas discretas: el momento protagonista es la carta y el pergamino
-    $$('.reveal').forEach(el => gsap.from(el, { opacity: .15, y: 12, filter: 'blur(4px)', duration: .9, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%' } }));
+    $$('.reveal').forEach(el => gsap.from(el, { opacity: .15, y: 12, filter: 'blur(4px)', duration: .9, ease: 'expo.out', clearProps: 'filter', scrollTrigger: { trigger: el, start: 'top 90%' } }));
     $$('.split').forEach(el => {
       if (el.closest('#hero')) return;
-      gsap.from($$('.w', el), { opacity: 0, y: 16, filter: 'blur(8px)', duration: 1.1, stagger: .07, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+      gsap.from($$('.w', el), { opacity: 0, y: 16, filter: 'blur(8px)', duration: 1.1, stagger: .07, ease: 'expo.out', clearProps: 'filter,willChange', scrollTrigger: { trigger: el, start: 'top 88%' } });
     });
 
     // Pergamino que se desenrolla
