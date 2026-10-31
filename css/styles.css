@@ -887,6 +887,3 @@ img { -webkit-user-drag: none; }
   .intro-hint { font-size: 12px; letter-spacing: .1em; }
   .intro-sound { font-size: 11px; }
 }
-
-/* "Mis XV años" del inicio en el rosado del ícono de volumen */
-.intro-kicker { color: #f1a0b0; text-shadow: 0 1px 10px rgba(40, 12, 30, .55), 0 0 22px rgba(255, 180, 210, .45); }
