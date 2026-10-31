@@ -900,3 +900,15 @@ img { -webkit-user-drag: none; }
 /* Guirnalda de cerezo entre el baile y el itinerario */
 .sec-seam { position: relative; z-index: 7; height: 0; pointer-events: none; }
 .sec-garland { position: absolute; left: 50%; top: 0; width: min(100vw, 640px); max-width: none; height: auto; transform: translate(-50%, -50%); }
+
+/* Confirmación: vuelve la versión 1 (silueta de Aurora sobre fondo crema) con la flecha visible */
+.rsvp { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 0; padding-top: 80px; padding-bottom: 64px; text-align: center; }
+.sil-aurora { width: 150px; aspect-ratio: 998 / 1600; margin: 0 auto 18px;
+  -webkit-mask: url("../assets/img/sil-aurora-rosa.png") center / contain no-repeat;
+  mask: url("../assets/img/sil-aurora-rosa.png") center / contain no-repeat;
+  background: var(--rose-grad); }
+.rsvp .title { margin: 0 0 8px; }
+.rsvp .body-text { max-width: 340px; }
+.rsvp .btn-big { width: min(340px, 100%); margin-top: 6px; white-space: nowrap; padding: 0 20px; font-size: 12.5px; }
+.rsvp .more-arrow { display: block; margin: 22px auto 0; width: 30px; height: 30px; color: var(--rose); opacity: .85; filter: none; }
+@media (max-height: 700px) { .rsvp { padding-top: 36px; } .sil-aurora { width: 104px; margin-bottom: 10px; } .rsvp .more-arrow { margin-top: 14px; } }
