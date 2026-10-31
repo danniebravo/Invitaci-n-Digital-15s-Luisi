@@ -111,6 +111,17 @@
     if (document.hidden) song.pause(); else if (wantMusic && introDone) song.play().catch(() => {});
   });
 
+  /* ---------------- Precarga de imágenes que entran por los lados ---------------- */
+  // Las palomas y el carrusel de fotos entran de lado: se cargan antes de llegar a su sección
+  if ('IntersectionObserver' in window) {
+    const pre = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('img[loading="lazy"]').forEach(img => { img.loading = 'eager'; });
+      pre.unobserve(e.target);
+    }), { rootMargin: '1200px 0px' });
+    ['#regalos', '#galeria'].forEach(s => { const el = document.querySelector(s); if (el) pre.observe(el); });
+  }
+
   /* ---------------- Separar palabras ---------------- */
   const splitWords = el => {
     const walk = n => {

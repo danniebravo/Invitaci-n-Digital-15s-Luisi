@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Invitación XV · imagen</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Miss+Fajardose&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #c9567a; --gold-3: #9b7429; --ink: #4a2b3a; --ink-soft: #7a5566; --wine: #8e2f55;
+    --gold-grad: linear-gradient(135deg, #8f6a22 0%, #e9cf8a 30%, #b8903c 52%, #f3dfa5 72%, #9b7429 100%);
+    --rose-grad: linear-gradient(135deg, #a8395e 0%, #e58fa9 45%, #c9567a 70%, #f2b8c9 100%);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: #fbeef1; }
+  .card { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+
+  /* Fondo: cielo rosa arriba, valle abajo */
+  .sky { position: absolute; inset: 0; background: linear-gradient(180deg, #fdf3f5 0%, #fbe6ec 38%, #f7dfe7 60%); }
+  .valley { position: absolute; left: 0; right: 0; bottom: 0; height: 1180px; background: url("../../assets/img/valle-poster.webp") center 100% / cover;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 26%); mask-image: linear-gradient(180deg, transparent 0%, #000 26%); }
+  .cloud { position: absolute; pointer-events: none; }
+  .cloud-l { left: -170px; top: 40px; width: 560px; }
+  .cloud-r { right: -190px; top: 300px; width: 600px; }
+  .cloud-b { left: -120px; top: 520px; width: 420px; opacity: .8; }
+
+  /* Título */
+  .head { position: absolute; z-index: 4; top: 70px; left: 0; right: 0; text-align: center; }
+  .lead { font-family: "Great Vibes", cursive; font-size: 74px; line-height: 1; background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .name { font-family: "Miss Fajardose", cursive; font-size: 212px; line-height: .86; margin-top: 6px;
+    background: var(--rose-grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding: .2em .25em .1em; }
+  .surname { font-family: "Cinzel", serif; font-size: 30px; letter-spacing: .42em; color: var(--ink-soft); margin-top: -18px; padding-left: .42em; }
+
+  /* Foto */
+  .girl { position: absolute; z-index: 3; left: 50%; top: 440px; height: 900px; width: auto; transform: translateX(-50%); }
+  .glow { position: absolute; z-index: 2; left: 50%; top: 480px; width: 1000px; height: 1000px; transform: translateX(-50%);
+    background: radial-gradient(closest-side, rgba(255, 250, 244, .95), rgba(255, 214, 230, .45) 55%, transparent 75%); }
+  .bloom { position: absolute; z-index: 5; width: 430px; top: 1000px; }
+  .bloom-l { left: -150px; transform: rotate(8deg); }
+  .bloom-r { right: -150px; transform: scaleX(-1) rotate(8deg); }
+
+  /* Tarjeta de datos */
+  .info { position: absolute; z-index: 6; left: 70px; right: 70px; bottom: 56px; padding: 44px 50px 34px; text-align: center;
+    background: rgba(255, 250, 244, .94); border-radius: 36px; border: 2px solid rgba(201, 162, 75, .6);
+    outline: 1.5px solid rgba(201, 162, 75, .4); outline-offset: -16px; box-shadow: 0 24px 60px rgba(120, 50, 80, .22); }
+  .crown { position: absolute; left: 50%; top: -58px; width: 150px; transform: translateX(-50%); filter: drop-shadow(0 6px 10px rgba(120, 80, 30, .25)); }
+  .invite { font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 500; font-size: 36px; color: var(--ink-soft); }
+  .date { display: flex; align-items: center; justify-content: center; gap: 34px; margin: 14px 0 0; }
+  .date-side { font-family: "Cinzel", serif; font-weight: 600; font-size: 30px; letter-spacing: .2em; color: var(--gold-3);
+    border-top: 2px solid rgba(201, 162, 75, .6); border-bottom: 2px solid rgba(201, 162, 75, .6); padding: 12px 6px; width: 190px; }
+  .date-day { font-family: "Cinzel", serif; font-weight: 600; font-size: 108px; line-height: 1; background: var(--rose-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .month { font-family: "Great Vibes", cursive; font-size: 64px; line-height: 1.1; color: var(--rose); margin-top: -4px; }
+  .hour { font-family: "Cinzel", serif; font-weight: 600; font-size: 30px; letter-spacing: .14em; color: var(--ink); }
+  .orn { width: 360px; height: 24px; margin: 14px auto 12px; color: #c9a24b; display: block; }
+  .place { font-family: "Great Vibes", cursive; font-size: 64px; line-height: 1; color: var(--wine); }
+  .addr { font-family: "Cinzel", serif; font-size: 25px; letter-spacing: .14em; color: var(--ink-soft); margin-top: 10px; }
+  .arrive { font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: 32px; color: var(--ink); margin-top: 10px; }
+  .arrive b { color: var(--rose); }
+  .bottom { display: flex; align-items: center; gap: 30px; margin-top: 20px; text-align: left; }
+  .notes { flex: 1; font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: 28px; line-height: 1.35; color: var(--ink); }
+  .notes p + p { margin-top: 10px; }
+  .notes .k { font-family: "Cinzel", serif; font-weight: 600; font-size: 21px; letter-spacing: .14em; color: var(--gold-3); display: block; }
+  .qr { flex: none; width: 180px; text-align: center; }
+  .qr img { width: 180px; height: 180px; border-radius: 14px; border: 2px solid rgba(201, 162, 75, .55); padding: 8px; background: #fffaf4; }
+  .qr span { display: block; margin: 8px -20px 0; white-space: nowrap; font-family: "Cinzel", serif; font-weight: 600; font-size: 17px; letter-spacing: .1em; color: var(--rose); line-height: 1.35; }
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div class="sky"></div>
+  <div class="valley"></div>
+  <img class="cloud cloud-l" src="../../assets/img/nube-rosa-1.webp" alt="">
+  <img class="cloud cloud-r" src="../../assets/img/nube-rosa-2.webp" alt="">
+
+  <div class="head">
+    <p class="lead">Mis XV años</p>
+    <h1 class="name">Luisa María</h1>
+    <p class="surname">BRAVO BASANTE</p>
+  </div>
+
+  <div class="glow"></div>
+  <img class="girl" src="../../assets/img/luisa-xv.webp" alt="">
+
+  <div class="info">
+    <img class="crown" src="../../assets/img/corona-oro.webp" alt="">
+    <p class="invite">Te invito a celebrar conmigo</p>
+    <div class="date">
+      <span class="date-side">SÁBADO</span>
+      <span class="date-day">05</span>
+      <span class="date-side">2026</span>
+    </div>
+    <p class="month">Diciembre</p>
+    <p class="hour">7:00 P.M.</p>
+    <svg class="orn" viewBox="0 0 240 24" aria-hidden="true">
+      <path d="M0 12h86M154 12h86" stroke="currentColor" stroke-width="1" fill="none"/>
+      <path d="M120 3c6 0 9 5 9 9s-3 9-9 9-9-5-9-9 3-9 9-9zm0 4c-3 0-5 2-5 5s2 5 5 5 5-2 5-5-2-5-5-5z" fill="currentColor"/>
+      <path d="M86 12c8-8 16-8 22 0-6 8-14 8-22 0zM154 12c-8-8-16-8-22 0 6 8 14 8 22 0z" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="80" cy="12" r="2" fill="currentColor"/><circle cx="160" cy="12" r="2" fill="currentColor"/>
+    </svg>
+    <p class="place">Finca Don Marcos</p>
+    <p class="addr">LA FLOR · TÚQUERRES · VÍA A OSPINA</p>
+    <p class="arrive">Llegada <b>6:00 p.m.</b> · Protocolo <b>7:00 p.m. en punto</b></p>
+    <div class="bottom">
+      <div class="notes">
+        <p><span class="k">VESTIMENTA FORMAL</span>El rosado está reservado para la quinceañera.</p>
+        <p><span class="k">LLUVIA DE SOBRES</span>¡Gracias de corazón por tu valioso detalle!</p>
+      </div>
+      <div class="qr">
+        <img src="qr-invitacion.png" alt="">
+        <span>CONFIRMA Y<br>VE LA UBICACIÓN</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
