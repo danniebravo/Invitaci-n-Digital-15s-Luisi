@@ -887,3 +887,6 @@ img { -webkit-user-drag: none; }
   .intro-hint { font-size: 12px; letter-spacing: .1em; }
   .intro-sound { font-size: 11px; }
 }
+
+/* Palomas: sin recorte arriba/abajo (las alas se cortaban al bajar) */
+.doves-sky { overflow: hidden; overflow-x: clip; overflow-y: visible; }
