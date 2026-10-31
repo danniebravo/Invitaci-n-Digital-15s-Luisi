@@ -41,7 +41,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
 }
-body.is-locked { overflow: hidden; height: 100svh; }
+body.is-locked { overflow: hidden; height: 100vh; height: 100svh; }
 img, video { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
@@ -272,7 +272,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
    HERO
    ========================================================= */
 .hero {
-  position: relative; height: 100svh; min-height: 620px; overflow: hidden;
+  position: relative; height: 100vh; height: 100svh; min-height: 620px; overflow: hidden;
   background: linear-gradient(180deg, #fff 0%, #fdf3f6 35%, #fbe9ef 60%);
 }
 .hero-media {
@@ -288,7 +288,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 .cloud-r { width: 62vw; max-width: 500px; right: -22vw; top: 16%; opacity: .9; }
 
 /* Título arriba y foto debajo en una columna: nunca se cruzan */
-.hero-stack { position: absolute; inset: 0; z-index: 4; display: flex; flex-direction: column; align-items: center; padding-top: max(7svh, 40px); }
+.hero-stack { position: absolute; inset: 0; z-index: 4; display: flex; flex-direction: column; align-items: center; padding-top: max(7vh, 40px); padding-top: max(7svh, 40px); }
 .hero-title { position: relative; z-index: 6; flex: none; text-align: center; padding: 0 12px; }
 .hero-lead { font-family: var(--f-body); font-style: italic; font-weight: 500; font-size: 24px; color: var(--gold-3); }
 .hero-name {
@@ -469,7 +469,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
    RECEPCIÓN
    ========================================================= */
 .place { position: relative; overflow: hidden; background: #f6d9df; }
-.place-img { position: relative; height: 104svh; min-height: 680px; }
+.place-img { position: relative; height: 104vh; height: 104svh; min-height: 680px; }
 .place-img::before { content: ""; position: absolute; inset: 0 0 auto; height: 22%; z-index: 1; background: linear-gradient(#fbf1ef, transparent); }
 .place-img::after { content: ""; position: absolute; inset: auto 0 0; height: 30%; z-index: 1; background: linear-gradient(transparent, rgba(246, 217, 223, .9)); }
 .place-img img { width: 100%; height: 115%; object-fit: cover; object-position: 40% 50%; }
@@ -538,7 +538,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
    CIERRE
    ========================================================= */
 .end {
-  position: relative; overflow: hidden; min-height: 100svh;
+  position: relative; overflow: hidden; min-height: 100vh; min-height: 100svh;
   background: linear-gradient(180deg, var(--cream) 0%, #f6d6e0 20%, #d895ad 44%, #9c4f74 66%, var(--night-2) 84%, var(--night) 100%);
   display: flex; flex-direction: column; align-items: center;
 }
@@ -561,7 +561,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
   .sec { padding: 120px 40px; }
   .cloud-l { width: 30vw; max-width: 520px; left: -4vw; top: 2%; }
   .cloud-r { width: 30vw; max-width: 560px; right: -4vw; top: 8%; }
-  .hero-stack { padding-top: 5svh; }
+  .hero-stack { padding-top: 5vh; padding-top: 5svh; }
   .hero-bloom { width: 34vw; }
   .hero-bloom-l { left: -6vw; } .hero-bloom-r { right: -6vw; }
   .polaroids { justify-content: center; overflow: visible; padding: 30px 20px; }
@@ -645,7 +645,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 .dream .lead { margin-top: 10px; padding: 0 20px; }
 
 /* Recepción: castillo protagonista arriba, tarjeta abajo */
-.place { min-height: 112svh; display: flex; flex-direction: column; align-items: center; padding: 70px 16px 56px; }
+.place { min-height: 112vh; min-height: 112svh; display: flex; flex-direction: column; align-items: center; padding: 70px 16px 56px; }
 .place-img { position: absolute; inset: 0; height: auto; min-height: 0; }
 .place-img img { height: 100%; }
 .place-castle { position: relative; z-index: 2; left: auto; bottom: auto; transform: none; width: min(78vw, 420px); margin: 0 auto -40px;
@@ -680,7 +680,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 .rain-env::before, .rain-env::after { content: none; }
 
 /* Confirma tu asistencia: glorieta con Aurora de fondo */
-.rsvp { position: relative; min-height: 112svh; padding-top: 70px; }
+.rsvp { position: relative; min-height: 112vh; min-height: 112svh; padding-top: 70px; }
 .rsvp-bg { position: absolute !important; inset: 0; z-index: 0 !important; }
 .rsvp-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 40% 75%; }
 .rsvp-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(248, 240, 227, .9) 0%, rgba(248, 240, 227, .72) 38%, rgba(248, 240, 227, .15) 70%, rgba(248, 240, 227, .5) 100%); }
@@ -836,7 +836,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 .gifts .body-text { text-shadow: 0 0 12px rgba(251, 238, 241, .95), 0 0 4px rgba(251, 238, 241, .9); }
 
 /* Confirma: sin cuadro; texto arriba sobre la ilustración, botón abajo */
-.rsvp { justify-content: space-between; min-height: 116svh; padding-top: 48px; padding-bottom: 40px; }
+.rsvp { justify-content: space-between; min-height: 116vh; min-height: 116svh; padding-top: 48px; padding-bottom: 40px; }
 .rsvp-top { position: relative; z-index: 2; max-width: 360px; text-align: center; }
 .rsvp-top::before { content: ""; position: absolute; inset: -30px -40px; z-index: -1; background: radial-gradient(closest-side, rgba(255, 249, 242, .78), rgba(255, 249, 242, 0)); pointer-events: none; }
 .rsvp-top .title { margin: 0 0 6px; text-shadow: 0 0 18px rgba(255, 248, 240, .95); }
@@ -860,3 +860,34 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 .more-arrow { width: 28px; height: 28px; opacity: .7; filter: drop-shadow(0 0 6px rgba(255, 248, 240, .9)); }
 .rsvp-top .btn-big { width: auto; white-space: nowrap; padding: 0 24px; font-size: 12.5px; }
 .more-arrow { opacity: .85; }
+
+/* =========================================================
+   Ronda 7 · cierre
+   ========================================================= */
+/* Android: evitar que tocar un texto abra la búsqueda/diccionario */
+body { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+input, textarea, select, [contenteditable] { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; }
+img { -webkit-user-drag: none; }
+.scroll-hint, .scroll-hint * { pointer-events: none; }
+
+/* Inicio: indicaciones legibles sobre el fondo */
+.intro-hint-row { display: block; padding: 9px 18px; border-radius: 999px; max-width: min(340px, calc(100vw - 32px));
+  background: rgba(110, 36, 72, .58); border: 1px solid rgba(255, 230, 240, .45);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-shadow: 0 6px 18px rgba(30, 10, 25, .35); }
+.intro-hint-row .intro-hint, .intro-hint { max-width: none; text-align: center; font-size: 12.5px; font-weight: 600; letter-spacing: .12em; line-height: 1.6;
+  text-shadow: 0 1px 6px rgba(40, 12, 30, .8); animation: pulseTextSoft 2.4s ease-in-out infinite; }
+@keyframes pulseTextSoft { 50% { opacity: .8; } }
+.hint-wand { display: inline-block; vertical-align: -.35em; width: auto; height: 1.6em; margin-right: .4em; transform: rotate(8deg);
+  filter: drop-shadow(0 0 3px rgba(255, 220, 160, .6)); animation: none; }
+.intro-sound { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: .12em; opacity: .95; margin-top: -12px;
+  text-shadow: 0 1px 8px rgba(40, 12, 30, .9); }
+.sound-icon { width: auto; height: 15px; flex: none; filter: drop-shadow(0 1px 4px rgba(40, 12, 30, .7)); }
+
+/* Carta: XV y fecha más visibles (mismos colores) */
+.letter-xv { font-size: 22px; font-weight: 600; letter-spacing: .4em; padding-left: .4em; line-height: 1; }
+.letter-date { font-size: 14px; font-weight: 600; letter-spacing: .24em; }
+
+@media (max-width: 340px) {
+  .intro-hint { font-size: 12px; letter-spacing: .1em; }
+  .intro-sound { font-size: 11px; }
+}
