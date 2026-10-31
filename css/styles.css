@@ -890,3 +890,6 @@ img { -webkit-user-drag: none; }
 
 /* Palomas: sin recorte arriba/abajo (las alas se cortaban al bajar) */
 .doves-sky { overflow: hidden; overflow-x: clip; overflow-y: visible; }
+
+/* "Once upon a dream" separado de las nubes */
+.dream .title { margin-bottom: 48px; }
