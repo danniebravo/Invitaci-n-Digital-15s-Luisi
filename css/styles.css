@@ -896,3 +896,6 @@ img { -webkit-user-drag: none; }
 
 /* Letras cursivas: que los trazos altos (l, h, b) no se recorten */
 .w { padding: .28em .12em .2em; margin: -.28em -.12em -.2em; }
+
+/* Guirnalda de cerezo entre el baile y el itinerario */
+.sec-garland { position: absolute; z-index: 6; left: 50%; top: 0; width: min(104vw, 640px); height: auto; transform: translate(-50%, -50%); pointer-events: none; }
