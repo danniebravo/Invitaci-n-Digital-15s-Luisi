@@ -550,8 +550,12 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 .end-castle { width: min(70vw, 340px); margin: 0 auto 10px; filter: drop-shadow(0 10px 30px rgba(255, 210, 225, .55)); }
 .end-text { font-family: var(--f-script); font-size: clamp(34px, 9.5vw, 52px); line-height: 1.2; color: #fff; text-shadow: 0 0 20px rgba(255, 190, 215, .6); }
 .end-sign { font-family: var(--f-caps); font-size: 12px; letter-spacing: .35em; text-transform: uppercase; color: var(--gold-2); margin-top: 16px; }
-.end-tree { position: relative; z-index: 2; margin-top: auto; width: min(86vw, 460px); }
-.end-tree img { width: 100%; }
+.end-flores { position: relative; z-index: 2; margin-top: auto; width: 100%; height: min(86svh, 760px); overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 84%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 22%, #000 84%, transparent 100%); }
+.end-halo { position: absolute; left: 50%; top: 40%; width: min(78vw, 560px); height: 82%; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(ellipse at center, rgba(250, 205, 226, .96) 0, rgba(214, 140, 176, .9) 40%, rgba(150, 70, 112, .6) 62%, rgba(60, 20, 55, 0) 78%); filter: blur(5px); }
+.end-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.end-luisa { position: absolute; left: 0; right: 0; bottom: 0; margin: 0 auto; width: min(92vw, 520px); height: auto; filter: drop-shadow(0 0 40px rgba(255, 200, 225, .35));
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 13%, #000 87%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 13%, #000 87%, transparent 100%); }
 .foot { position: relative; z-index: 4; width: 100%; padding: 18px 16px calc(92px + env(safe-area-inset-bottom)); background: transparent; margin-top: -6px; text-align: center; font-family: var(--f-caps); font-size: 10px; letter-spacing: .35em; color: rgba(255, 255, 255, .8); text-shadow: 0 1px 6px rgba(0, 0, 0, .6); }
 
 /* =========================================================
@@ -565,7 +569,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
   .hero-bloom { width: 34vw; }
   .hero-bloom-l { left: -6vw; } .hero-bloom-r { right: -6vw; }
   .polaroids { justify-content: center; overflow: visible; padding: 30px 20px; }
-  .polaroid { flex: 0 0 260px; }
+  .polaroid { flex: 0 0 min(236px, 17.4vw); }
   .swipe-hint { display: none; }
   .fairy-rosa { right: 8vw; } .fairy-verde { left: 6vw; } .fairy-azul { right: 14vw; }
   .countdown { gap: 14px; max-width: 560px; }
@@ -613,7 +617,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 @media (hover: hover) { .qr-card:hover { transform: translateY(-3px); } }
 
 /* Cierre: la última línea con su propio espacio */
-.end-tree { margin-bottom: -2px; }
+.end-flores { margin-bottom: -2px; }
 .foot { color: #fff1f6; text-shadow: 0 1px 10px rgba(40, 10, 30, .9), 0 0 2px rgba(40, 10, 30, .8); font-size: 11px; }
 
 @media (min-width: 761px) {
@@ -915,3 +919,9 @@ img { -webkit-user-drag: none; }
 
 /* La "A" de Adriana en Great Vibes parece minúscula: se usa la A de Parisienne */
 .cap-a { font-family: "Parisienne", var(--f-script); }
+
+/* Cierre en celular: Luisa más grande y halo más fuerte para cubrir la puerta del video */
+@media (max-width: 760px) {
+  .end-luisa { width: min(118vw, 520px); }
+  .end-halo { width: 100vw; height: 88%; top: 42%; }
+}

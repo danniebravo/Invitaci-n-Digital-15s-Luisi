@@ -3,7 +3,7 @@
 
   /* ---------------- Datos del evento ---------------- */
   const EVENT_DATE = new Date('2026-12-05T19:00:00-05:00'); // Sábado 05 dic 2026, 7:00 p.m. (Colombia)
-  const WHATSAPP = '573155530878';
+  const WHATSAPP = '573155863999';
   const WA_TEXT = 'Hola 👑 Confirmo mi asistencia a los XV años de Luisa María.\n\nNombre: \nNúmero de personas: ';
 
   const $ = (s, c = document) => c.querySelector(s);
