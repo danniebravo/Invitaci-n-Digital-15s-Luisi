@@ -17,3 +17,6 @@ tools/_*
 
 # Invitación en imagen (para compartir; no se publica)
 Invitación en imagen/
+
+# impresos (tarjeta, etiquetas, sellos): no van a git
+tools/invitacion-imagen/
