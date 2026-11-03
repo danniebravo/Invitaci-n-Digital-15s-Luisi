@@ -13,17 +13,13 @@
   html, body { width: 21.59cm; height: 27.94cm; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .sheet { position: relative; width: 21.59cm; height: 27.94cm; padding: 1.7cm 1.8cm 0; }
   .labels { display: grid; grid-template-columns: 9cm 9cm; gap: .9cm 1cm; }
-  .label { position: relative; width: 9cm; height: 3cm; background: #fbf4ea var(--paper); overflow: hidden; outline: .1mm dashed #b9b9b9; outline-offset: 1mm; }
-  .label::before, .label::after { content: ""; position: absolute; left: 1.2cm; right: .6cm; height: .15mm;
-    background: linear-gradient(90deg, transparent, var(--gold) 25%, var(--gold) 75%, transparent); }
-  .label::before { top: .38cm; } .label::after { bottom: .38cm; }
-  .sil { position: absolute; right: 2.6cm; top: -.2cm; height: 3.4cm; aspect-ratio: 1870/2165; opacity: .14;
-    -webkit-mask: url("sil-aurora-rueca.png") center / contain no-repeat; mask: url("sil-aurora-rueca.png") center / contain no-repeat;
-    background: linear-gradient(135deg,#a8395e,#e58fa9 50%,#c9567a); }
-  .flores { position: absolute; right: 0; bottom: 0; width: 1.75cm; height: 2.4cm; background: url("marco-peonias.png") right bottom / 7.4cm auto no-repeat; }
+  .label { position: relative; width: 9cm; height: 3cm; background: #fffdfc; overflow: hidden; outline: .1mm dashed #b9b9b9; outline-offset: 1mm; }
+  .flores { position: absolute; right: 0; width: 2.7cm; aspect-ratio: 560/330; background: center / 100% 100% no-repeat; }
+  .f-top { top: 0; background-image: url("flor-esq-arriba.png"); }
+  .f-bot { bottom: 0; background-image: url("flor-esq-abajo.png"); }
   .txt { position: absolute; left: 1.9cm; right: 1.6cm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; }
   .trato { font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 600; font-size: 12pt; color: var(--ink-soft); line-height: 1; }
-  .nombre { font-family: "Great Vibes", cursive; font-size: 14.5pt; line-height: 1.3; color: var(--wine); white-space: nowrap; margin-top: .05cm; }
+  .nombre { font-family: "Great Vibes", cursive; font-size: 13.5pt; line-height: 1.3; color: var(--wine); white-space: nowrap; margin-top: .05cm; }
   .seals { display: grid; grid-template-columns: repeat(4, 4cm); gap: .5cm .5cm; margin-top: 1.2cm; justify-content: center; }
   .seal { width: 4cm; height: 4cm; outline: .1mm dashed #b9b9b9; outline-offset: .5mm; border-radius: 50%; }
   .seal svg { display: block; width: 100%; height: 100%; }
@@ -64,7 +60,7 @@ const NOMBRES = [
   ["Señor:", "Miguel Bravo y Sra."],
 ];
 document.getElementById("labels").innerHTML = NOMBRES.map(([t, n]) =>
-  `<div class="label"><div class="sil"></div><div class="flores"></div>
+  `<div class="label"><div class="flores f-top"></div><div class="flores f-bot"></div>
    <div class="txt"><span class="trato">${t}</span><span class="nombre">${n}</span></div></div>`).join("");
 
 const SELLO = `<svg viewBox="0 0 200 200">
