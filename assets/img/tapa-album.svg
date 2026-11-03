@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400">
+  <defs>
+    <pattern id="p" width="9" height="9" patternUnits="userSpaceOnUse">
+      <circle cx="4.5" cy="4.5" r="1.3" fill="#cf9488"/>
+      <path d="M4.5 .6c1 1.3 1 2 0 3M4.5 8.4c-1-1.3-1-2 0-3M.6 4.5c1.3-1 2-1 3 0M8.4 4.5c-1.3 1-2 1-3 0" fill="none" stroke="#cf9488" stroke-width=".55" stroke-linecap="round"/>
+    </pattern>
+    <g id="rose">
+      <path d="M0-3C2-7 6-7 6-3M0 3C-2 7-6 7-6 3M-3 0C-7-2-7-6-3-6M3 0C7 2 7 6 3 6" fill="none" stroke="#c4857a" stroke-width=".8" stroke-linecap="round"/>
+      <circle r="3.2" fill="#f6d9ce" stroke="#c4857a" stroke-width=".7"/>
+      <circle r="1.2" fill="#c4857a"/>
+    </g>
+    <g id="corner" fill="none" stroke="#c4857a" stroke-width=".9" stroke-linecap="round">
+      <path d="M2 -2C12 -8 22 -7 27 0 30 5 26 10 21 8 17 6 18 1 22 2"/>
+      <path d="M-2 -2C-8 -12 -7 -22 0 -27 5 -30 10 -26 8 -21 6 -17 1 -18 2 -22"/>
+      <path d="M4 4C12 6 19 12 20 21M4 4C6 12 12 19 21 20" stroke-width=".7"/>
+      <circle cx="27" cy="0" r="1.3" fill="#c4857a" stroke="none"/>
+      <circle cx="0" cy="-27" r="1.3" fill="#c4857a" stroke="none"/>
+      <circle cx="21" cy="21" r="1.5" fill="#c4857a" stroke="none"/>
+    </g>
+    <g id="crest" fill="none" stroke="#c4857a" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0-14l6 8-6 8-6-8z" fill="#f6d9ce"/>
+      <path d="M-8-6C-18-13-30-10-36-1-28-5-18-3-9 3M8-6C18-13 30-10 36-1 28-5 18-3 9 3"/>
+      <path d="M-12 0C-22 6-26 14-22 20M12 0C22 6 26 14 22 20" stroke-width=".7"/>
+      <circle cy="6" r="1.4" fill="#c4857a" stroke="none"/>
+    </g>
+    <g id="side" fill="none" stroke="#c4857a" stroke-width=".9" stroke-linecap="round">
+      <path d="M0-34C-9-24-9-12 0 0 9 12 9 24 0 34"/>
+      <path d="M0-34c-5 1-7 5-5 8M0 34c-5-1-7-5-5-8" stroke-width=".7"/>
+      <circle cy="-20" r="1.5" fill="#c4857a" stroke="none"/><circle cy="20" r="1.5" fill="#c4857a" stroke="none"/><circle r="2" fill="#f6d9ce"/>
+    </g>
+  </defs>
+
+  <!-- banda ornamental -->
+  <path fill="#f8d5e0" fill-rule="evenodd" d="M9 9h282v382H9zM27 27h246v346H27z"/>
+  <path fill="url(#p)" fill-rule="evenodd" d="M12 12h276v376H12zM24 24h252v352H24z"/>
+  <g fill="none" stroke="#c4857a">
+    <rect x="9" y="9" width="282" height="382" rx="3" stroke-width="1.1"/>
+    <rect x="12" y="12" width="276" height="376" rx="2" stroke-width=".4"/>
+    <rect x="24" y="24" width="252" height="352" stroke-width=".4"/>
+    <rect x="27" y="27" width="246" height="346" stroke-width="1"/>
+    <rect x="33" y="33" width="234" height="334" rx="2" stroke-width=".9"/>
+    <rect x="36" y="36" width="228" height="328" rx="1" stroke-width=".4"/>
+  </g>
+  <use href="#rose" x="18" y="18"/><use href="#rose" x="282" y="18"/><use href="#rose" x="18" y="382"/><use href="#rose" x="282" y="382"/>
+
+  <!-- adornos entre el marco y el panel -->
+  <use href="#crest" x="150" y="60"/>
+  <use href="#crest" transform="translate(150 340) scale(1 -1)"/>
+  <use href="#side" x="48" y="200"/>
+  <use href="#side" transform="translate(252 200) scale(-1 1)"/>
+  <use href="#corner" transform="translate(240 80)"/>
+  <use href="#corner" transform="translate(60 80) scale(-1 1)"/>
+  <use href="#corner" transform="translate(60 320) scale(-1 -1)"/>
+  <use href="#corner" transform="translate(240 320) scale(1 -1)"/>
+
+  <!-- panel crema con esquinas cóncavas -->
+  <path fill="#fcf3ea" stroke="#c4857a" stroke-width="1" d="M82 80H218A22 22 0 0 0 240 102V298A22 22 0 0 0 218 320H82A22 22 0 0 0 60 298V102A22 22 0 0 0 82 80Z"/>
+  <path fill="none" stroke="#c4857a" stroke-width=".5" d="M83 86H217A17 17 0 0 0 234 103V297A17 17 0 0 0 217 314H83A17 17 0 0 0 66 297V103A17 17 0 0 0 83 86Z"/>
+  <use href="#rose" x="240" y="80"/><use href="#rose" x="60" y="80"/><use href="#rose" x="60" y="320"/><use href="#rose" x="240" y="320"/>
+</svg>

@@ -952,28 +952,16 @@ img { -webkit-user-drag: none; }
 .bk-crown { width: 22%; min-width: 54px; color: #f3d9a0; }
 .pg-note .bk-crown { width: 16%; color: var(--gold-2, #c9a24b); }
 .bk-kicker { font-family: var(--f-caps); font-size: 11px; font-size: 3cqw; letter-spacing: .3em; text-transform: uppercase; }
-/* Tapa: bordado rosado, marco dorado, corona y etiqueta con el título */
-.pg-cover { justify-content: flex-start; gap: 0; padding: 10% 9% 9%; color: #7a2848;
-  background: linear-gradient(rgba(190, 70, 110, .08), rgba(120, 30, 70, .22)), url(../assets/img/cover-damasco-rosa.webp) center / cover; }
-.pg-cover::before { content: ""; position: absolute; inset: 4.2%; border: 1.5px solid #c9a24b; border-radius: 6px; box-shadow: inset 0 0 0 4px rgba(255, 244, 220, .35), inset 0 0 0 5px rgba(201, 162, 75, .7); pointer-events: none; }
-.bk-c { position: absolute; width: 9cqw; color: #c9a24b; }
-.bk-c:nth-of-type(1) { top: 4.2%; left: 4.2%; }
-.bk-c:nth-of-type(2) { top: 4.2%; right: 4.2%; transform: scaleX(-1); }
-.bk-c:nth-of-type(3) { bottom: 4.2%; left: 4.2%; transform: scaleY(-1); }
-.bk-c:nth-of-type(4) { bottom: 4.2%; right: 4.2%; transform: scale(-1, -1); }
-.bk-spark { position: absolute; color: #d9b45a; width: 4cqw; opacity: .9; filter: drop-shadow(0 1px 2px rgba(90, 30, 60, .3)); }
-.bk-spark:nth-of-type(5) { top: 17%; left: 15%; width: 3.4cqw; }
-.bk-spark:nth-of-type(6) { top: 12%; right: 16%; }
-.bk-spark:nth-of-type(7) { bottom: 22%; right: 13%; width: 3cqw; }
-.bk-corona { position: relative; z-index: 1; width: 46%; margin-top: 2%; filter: drop-shadow(0 3px 6px rgba(80, 30, 50, .35)); }
-.bk-label { position: relative; width: 84%; margin-top: -3%; padding: 6% 4% 6%; display: flex; flex-direction: column; align-items: center; gap: 1.6cqw; text-align: center;
-  background: rgba(255, 250, 240, .94); border: 1.5px solid #c9a24b; border-radius: 14px; box-shadow: 0 0 0 4px rgba(255, 250, 240, .4), 0 8px 18px rgba(90, 30, 60, .3); }
-.pg-cover .bk-kicker { color: #9a7a2e; }
-.pg-cover .bk-title { color: #b94a6f; font-size: 36px; font-size: 10.5cqw; }
-.bk-orn { width: 34cqw; color: #c9a24b; }
-.bk-name { font-family: var(--f-script); font-size: 34px; font-size: 10cqw; color: #7a2848; line-height: 1; }
-.bk-date { font-family: var(--f-caps); font-size: 12px; font-size: 3.4cqw; letter-spacing: .3em; color: #7a2848; }
-.bk-hint { position: absolute; bottom: 8.5%; font-family: var(--f-caps); font-size: 10px; font-size: 2.8cqw; letter-spacing: .24em; text-transform: uppercase; color: #fff4e0; text-shadow: 0 1px 4px rgba(90, 30, 60, .6); }
+/* Tapa: libro de cuentos rosado con marco ornamentado y panel crema */
+.pg-cover { padding: 0; justify-content: center; background: url(../assets/img/tapa-album.svg) 100% 0 / 94% 100% no-repeat, linear-gradient(90deg, #f7c4d5, #f7c4d5); }
+.pg-cover::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6%; background: linear-gradient(90deg, #e58cac 0, #f1adc3 60%, #f8c6d6 100%); box-shadow: inset -2px 0 4px rgba(120, 40, 70, .28), inset 1px 0 0 rgba(255, 255, 255, .35); }
+.pg-cover::after { content: ""; position: absolute; left: 3.2%; top: 4%; bottom: 4%; width: 0; border-left: 1px solid rgba(120, 40, 70, .22); border-right: 1px solid rgba(255, 255, 255, .35); }
+.bk-center { position: absolute; left: 26%; right: 19%; top: 22%; bottom: 22%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1.2cqw; }
+.bk-corona { width: 34%; margin-bottom: 1cqw; filter: drop-shadow(0 2px 4px rgba(110, 50, 60, .3)); }
+.bk-mis { font-family: "UnifrakturCook", var(--f-script); font-weight: 700; font-size: 44px; font-size: 15.5cqw; line-height: .95; color: #d4749a; }
+.bk-name { font-family: "UnifrakturCook", var(--f-script); font-weight: 700; font-size: 26px; font-size: 9.6cqw; line-height: 1; color: #d4749a; }
+.bk-orn { width: 22cqw; color: #d49a8c; margin: 1cqw 0; }
+.bk-date { font-family: var(--f-caps); font-weight: 600; font-size: 11px; font-size: 3.4cqw; letter-spacing: .28em; color: #b9577f; }
 .book-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 22px; }
 .book-count { font-family: var(--f-caps); font-size: 12px; letter-spacing: .14em; color: var(--rose); min-width: 190px; }
 .book-nav { width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid rgba(201, 86, 122, .55); background: rgba(255, 255, 255, .8); color: var(--rose); display: grid; place-items: center; cursor: pointer; box-shadow: 0 4px 12px rgba(201, 86, 122, .2); }

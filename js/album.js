@@ -73,7 +73,7 @@
     e.preventDefault();
     if (!files.length) return;
     sendBtn.disabled = true; input.disabled = true;
-    const nombre = $('#guestName').value.trim();
+    const nombre = '';   // ya no se pide el nombre: no se muestra en el libro
     let ok = 0;
     for (let i = 0; i < files.length; i++) {
       const li = queue.children[i], st = li.querySelector('.q-state');
@@ -117,18 +117,13 @@
   const CROWN = '<svg class="bk-crown" viewBox="0 0 64 40" aria-hidden="true"><path d="M6 34 10 12l12 11L32 6l10 17 12-11 4 22z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M6 37h52" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="10" cy="10" r="2.6" fill="currentColor"/><circle cx="32" cy="4.5" r="2.6" fill="currentColor"/><circle cx="54" cy="10" r="2.6" fill="currentColor"/></svg>';
 
   const ORN = '<svg class="bk-orn" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h48M70 6h48" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M60 1l5 5-5 5-5-5z" fill="currentColor"/></svg>';
-  const CORNER = '<svg class="bk-c" viewBox="0 0 40 40" aria-hidden="true"><path d="M3 37V13C3 7 7 3 13 3h24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="13" cy="13" r="2.6" fill="currentColor"/></svg>';
-  const SPARK = '<svg class="bk-spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z" fill="currentColor"/></svg>';
-  const pageCover = () => el('div', 'pg pg-cover', `${CORNER}${CORNER}${CORNER}${CORNER}${SPARK}${SPARK}${SPARK}
-    <img class="bk-corona" src="assets/img/corona-oro.webp" alt="" width="900" height="591">
-    <div class="bk-label">
-      <span class="bk-kicker">Una vez en un sueño</span>
-      <span class="bk-title">Recuerdo de mis XV</span>
-      ${ORN}
+  const pageCover = () => el('div', 'pg pg-cover', `<div class="bk-center">
+      <img class="bk-corona" src="assets/img/corona-oro.webp" alt="" width="900" height="591">
+      <span class="bk-mis">Mis XV</span>
       <span class="bk-name">Luisa María</span>
+      ${ORN}
       <span class="bk-date">05 · 12 · 2026</span>
-    </div>
-    <span class="bk-hint">Toca para abrir</span>`);
+    </div>`);
   const pageNote = () => el('div', 'pg pg-note', '<span class="bk-title sm">Recuerdos</span><span class="bk-line">Cada foto es un pedacito de esta noche, vista por todos los que la vivieron.</span>');
   const pageEnd = () => el('div', 'pg pg-note', `${CROWN}<span class="bk-title sm">Gracias</span><span class="bk-line">por cada recuerdo compartido.</span>`);
   const pageBlank = () => el('div', 'pg pg-note');
