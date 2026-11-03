@@ -918,3 +918,10 @@ img { -webkit-user-drag: none; }
 /* La "A" de Adriana en Great Vibes parece minúscula: se usa la A de Parisienne */
 .cap-a { font-family: "Parisienne", var(--f-script); }
 
+
+/* Álbum: galería de fotos subidas */
+.album-gallery { width: min(100%, 640px); margin: 34px auto 6px; text-align: center; }
+.album-gallery-title { font-family: var(--f-script); font-size: clamp(30px, 8vw, 40px); color: var(--rose); margin-bottom: 14px; font-weight: 400; }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.gallery-grid a { display: block; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: rgba(201, 86, 122, .1); box-shadow: 0 4px 12px rgba(201, 86, 122, .15); }
+.gallery-grid img { width: 100%; height: 100%; object-fit: cover; display: block; }

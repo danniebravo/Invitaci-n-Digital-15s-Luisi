@@ -58,7 +58,11 @@
   };
 
   input.addEventListener('change', () => {
-    files = [...input.files].filter(f => f.type.startsWith('image/'));
+    // se suman a las ya elegidas (así se pueden elegir de a varias, en varias tandas)
+    const key = f => `${f.name}|${f.size}|${f.lastModified}`;
+    const have = new Set(files.map(key));
+    files = files.concat([...input.files].filter(f => f.type.startsWith('image/') && !have.has(key(f))));
+    input.value = '';
     queue.replaceChildren(...files.map(item));
     sendBtn.disabled = files.length === 0;
     sendBtn.textContent = files.length > 1 ? `Subir mis ${files.length} fotos` : 'Subir mis fotos';
@@ -94,5 +98,27 @@
       : `Se guardaron ${ok} de ${files.length}. Vuelve a elegir las que fallaron para reintentar.`;
     input.value = ''; input.disabled = false; files = [];
     sendBtn.textContent = 'Subir mis fotos';
+    if (ok) loadGallery();
   });
+
+  /* Galería: fotos que ya subieron los invitados (miniaturas de Drive) */
+  const gallery = $('#gallery'), grid = $('#galleryGrid'), gmsg = $('#galleryMsg');
+  async function loadGallery() {
+    if (!url) return;
+    try {
+      const res = await fetch(url + '?accion=lista');
+      const out = await res.json();
+      if (!out.ok) return;
+      gallery.hidden = false;
+      grid.replaceChildren(...out.fotos.map(id => {
+        const a = document.createElement('a');
+        a.href = `https://drive.google.com/file/d/${id}/view`; a.target = '_blank'; a.rel = 'noopener';
+        const img = new Image();
+        img.src = `https://drive.google.com/thumbnail?id=${id}&sz=w500`; img.alt = 'Foto de la fiesta'; img.loading = 'lazy'; img.decoding = 'async';
+        a.append(img); return a;
+      }));
+      gmsg.textContent = out.fotos.length ? '' : 'Aún no hay fotos. ¡Sé la primera persona en compartir un recuerdo!';
+    } catch (e) { /* sin conexión: la galería simplemente no aparece */ }
+  }
+  loadGallery();
 })();

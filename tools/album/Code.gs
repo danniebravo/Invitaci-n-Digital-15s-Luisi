@@ -31,9 +31,23 @@ function status_() {
   return 'abierto';
 }
 
-/** GET: la página pregunta si el álbum está abierto. */
-function doGet() {
-  return json_({ ok: true, estado: status_() });
+/** GET: estado del álbum. Con ?accion=lista devuelve también los ids de las fotos (más nuevas primero). */
+function doGet(e) {
+  const estado = status_();
+  if (e && e.parameter && e.parameter.accion === 'lista') {
+    const folder = getFolder_();
+    const props = PropertiesService.getScriptProperties();
+    if (!props.getProperty('SHARED')) { // las miniaturas necesitan "cualquiera con el enlace puede ver"
+      folder.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+      props.setProperty('SHARED', '1');
+    }
+    const out = [];
+    const it = folder.getFiles();
+    while (it.hasNext()) { const f = it.next(); out.push({ id: f.getId(), t: f.getDateCreated().getTime() }); }
+    out.sort(function (a, b) { return b.t - a.t; });
+    return json_({ ok: true, estado: estado, fotos: out.slice(0, 200).map(function (x) { return x.id; }) });
+  }
+  return json_({ ok: true, estado: estado });
 }
 
 /** POST: { nombre, archivo, tipo, datos (base64) } */
