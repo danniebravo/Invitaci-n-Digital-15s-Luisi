@@ -1,7 +1,7 @@
 (() => {
   'use strict';
-  const OPEN_FROM = new Date('2026-12-05T00:00:00-05:00');
-  const OPEN_UNTIL = new Date('2026-12-07T00:00:00-05:00');
+  const OPEN_FROM = new Date('2026-11-02T00:00:00-05:00'); // PRUEBA: restaurar a 2026-12-05
+  const OPEN_UNTIL = new Date('2026-11-06T00:00:00-05:00'); // PRUEBA: restaurar a 2026-12-07
   const MAX_SIDE = 2000;
   const QUALITY = 0.85;
 
