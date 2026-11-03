@@ -103,6 +103,12 @@
 
   /* Galería: fotos que ya subieron los invitados (miniaturas de Drive) */
   const gallery = $('#gallery'), grid = $('#galleryGrid'), gmsg = $('#galleryMsg');
+  // Drive limita las miniaturas cuando se piden muchas juntas: se reintenta alternando las dos direcciones
+  const THUMBS = [id => `https://drive.google.com/thumbnail?id=${id}&sz=w500`, id => `https://lh3.googleusercontent.com/d/${id}=w500`];
+  function thumb(img, id, n = 0) {
+    img.onerror = () => { if (n < 5) setTimeout(() => thumb(img, id, n + 1), 500 + n * 700); };
+    img.src = THUMBS[n % 2](id) + (n && n % 2 === 0 ? '&r=' + n : '');
+  }
   async function loadGallery() {
     if (!url) return;
     try {
@@ -114,8 +120,8 @@
         const a = document.createElement('a');
         a.href = `https://drive.google.com/file/d/${id}/view`; a.target = '_blank'; a.rel = 'noopener';
         const img = new Image();
-        img.src = `https://drive.google.com/thumbnail?id=${id}&sz=w500`; img.alt = 'Foto de la fiesta'; img.loading = 'lazy'; img.decoding = 'async';
-        a.append(img); return a;
+        img.alt = 'Foto de la fiesta'; img.decoding = 'async';
+        thumb(img, id); a.append(img); return a;
       }));
       gmsg.textContent = out.fotos.length ? '' : 'Aún no hay fotos. ¡Sé la primera persona en compartir un recuerdo!';
     } catch (e) { /* sin conexión: la galería simplemente no aparece */ }

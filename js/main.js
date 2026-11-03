@@ -270,7 +270,6 @@
     // Nubes de transición: se deslizan suave al pasar (parallax)
 
     // Cierre: el árbol crece
-    gsap.fromTo('#endTree', { yPercent: 45 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#fin', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
     ScrollTrigger.refresh();
     addEventListener('load', () => ScrollTrigger.refresh());
