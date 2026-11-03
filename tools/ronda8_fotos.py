@@ -22,6 +22,24 @@ def recortar(im):
     return out
 
 
+def matte(im, semilla):
+    """Recorte fino: birefnet -> solo el componente de la persona -> pymatting (borde suave) -> color sin halo del fondo.
+    semilla = (x, y) de un punto dentro de la persona (en px de im)."""
+    from rembg import remove, new_session
+    from pymatting import estimate_alpha_cf, estimate_foreground_ml
+    a = np.asarray(remove(im, session=new_session("birefnet-general"), only_mask=True)).astype(np.float32) / 255
+    n, lab, _, _ = cv2.connectedComponentsWithStats((a > .5).astype(np.uint8), connectivity=4)
+    a = a * (lab == lab[semilla[1], semilla[0]])
+    fg = cv2.erode((a > .97).astype(np.uint8), np.ones((9, 9), np.uint8))
+    bg = 1 - cv2.dilate((a > .03).astype(np.uint8), np.ones((15, 15), np.uint8))
+    tri = np.full(a.shape, .5, np.float64); tri[fg > 0] = 1; tri[bg > 0] = 0
+    x = np.asarray(im.convert("RGB")).astype(np.float64) / 255
+    al = np.clip(estimate_alpha_cf(x, tri), 0, 1)
+    f = np.clip(estimate_foreground_ml(x, al), 0, 1)
+    out = np.dstack([(f * 255).astype(np.uint8), (al * 255).astype(np.uint8)])
+    return Image.fromarray(out, "RGBA")
+
+
 def suavizar_brazos(im):
     """Quita la textura granulosa de la piel de hombros y brazos sin tocar cara ni vestido."""
     a = np.asarray(im.convert("RGB"))
@@ -48,14 +66,21 @@ def suavizar_brazos(im):
 def main():
     modo = sys.argv[1]
     if modo == "hero":
-        cut = recortar(abrir(FV / "lu.JPG", 1600))
+        cut = matte(abrir(FV / "lu.JPG", 1300), (640, 880))
         cut = cut.crop(cut.getbbox()); cut.thumbnail((1400, 1800))
+        # zonas a borrar (px del resultado): arete/hebra suelta del lado izquierdo de la cara, pedacito gris del peinado
+        al = np.asarray(cut.getchannel("A")).astype(np.float32)
+        z = np.zeros_like(al)
+        for x0, y0, x1, y1 in [(612, 112, 637, 250), (650, 244, 680, 278)]:
+            z[y0:y1, x0:x1] = 1
+        al *= 1 - cv2.GaussianBlur(z, (0, 0), 2)
+        cut.putalpha(Image.fromarray(al.astype(np.uint8)))
         cut.save(IMG / "luisa-xv.webp", "WEBP", quality=90, method=6)
         print("hero", cut.size)
     elif modo == "final":
-        im = suavizar_brazos(abrir(FV / "brazos.JPG", 1600))
-        im.save(ROOT / "tools" / "_final_suave.jpg", quality=95)
-        cut = recortar(im)
+        # final.png: la usuaria ya suavizó la piel de los brazos; aquí solo se recorta
+        im = ImageOps.exif_transpose(Image.open(FV / "final.png")).convert("RGB")
+        cut = matte(im, (560, 1000))
         cut = cut.crop(cut.getbbox()); cut.thumbnail((1200, 1800))
         cut.save(IMG / "luisa-final.webp", "WEBP", quality=90, method=6)
         print("final", cut.size)
