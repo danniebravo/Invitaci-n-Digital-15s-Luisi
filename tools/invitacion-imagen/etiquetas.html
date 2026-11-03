@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Etiquetas y sellos · XV Luisa María</title>
+<!-- Hoja carta a tamaño real: etiqueta 9 x 3 cm, sello 4 cm. Imprimir al 100 %. -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Great+Vibes&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+  @page { size: 21.59cm 27.94cm; margin: 0; }
+  :root { --wine:#8e2f55; --gold:#c9a24b; --ink:#4a2b3a; --ink-soft:#7a5566;
+    --paper: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='520'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .42  0 0 0 0 .3  0 0 0 0 .18  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 21.59cm; height: 27.94cm; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sheet { position: relative; width: 21.59cm; height: 27.94cm; padding: 1.7cm 1.8cm 0; }
+  .labels { display: grid; grid-template-columns: 9cm 9cm; gap: .9cm 1cm; }
+  .label { position: relative; width: 9cm; height: 3cm; background: #fbf4ea var(--paper); overflow: hidden; outline: .1mm dashed #b9b9b9; outline-offset: 1mm; }
+  .label::before, .label::after { content: ""; position: absolute; left: 1.2cm; right: .6cm; height: .15mm;
+    background: linear-gradient(90deg, transparent, var(--gold) 25%, var(--gold) 75%, transparent); }
+  .label::before { top: .38cm; } .label::after { bottom: .38cm; }
+  .sil { position: absolute; right: 2.6cm; top: -.2cm; height: 3.4cm; aspect-ratio: 1870/2165; opacity: .14;
+    -webkit-mask: url("sil-aurora-rueca.png") center / contain no-repeat; mask: url("sil-aurora-rueca.png") center / contain no-repeat;
+    background: linear-gradient(135deg,#a8395e,#e58fa9 50%,#c9567a); }
+  .flores { position: absolute; right: 0; bottom: 0; width: 1.75cm; height: 2.4cm; background: url("marco-peonias.png") right bottom / 7.4cm auto no-repeat; }
+  .txt { position: absolute; left: 1.9cm; right: 1.6cm; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+  .trato { font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 600; font-size: 12pt; color: var(--ink-soft); line-height: 1; }
+  .nombre { font-family: "Great Vibes", cursive; font-size: 14.5pt; line-height: 1.3; color: var(--wine); white-space: nowrap; margin-top: .05cm; }
+  .seals { display: grid; grid-template-columns: repeat(4, 4cm); gap: .5cm .5cm; margin-top: 1.2cm; justify-content: center; }
+  .seal { width: 4cm; height: 4cm; outline: .1mm dashed #b9b9b9; outline-offset: .5mm; border-radius: 50%; }
+  .seal svg { display: block; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="labels" id="labels"></div>
+  <div class="seals" id="seals"></div>
+</div>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="cera" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="9"/>
+    </filter>
+    <radialGradient id="gCera" cx="38%" cy="32%" r="80%">
+      <stop offset="0" stop-color="#f3cdd8"/><stop offset=".5" stop-color="#e2a3b6"/><stop offset="1" stop-color="#c47c93"/>
+    </radialGradient>
+    <radialGradient id="gCentro" cx="42%" cy="36%" r="75%">
+      <stop offset="0" stop-color="#f6d6df"/><stop offset=".6" stop-color="#e8b2c3"/><stop offset="1" stop-color="#d28fa5"/>
+    </radialGradient>
+    <linearGradient id="gAnillo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbe3ea"/><stop offset=".5" stop-color="#d9a0b3"/><stop offset="1" stop-color="#b8708a"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<script>
+const NOMBRES = [
+  ["Señora:", "Luz Marina Bastidas de Basante"],
+  ["Señor:", "Willian Castillo, Sra. e hijas"],
+  ["Señor:", "Hernán Basante, Sra. e hijo"],
+  ["Señor:", "Álvaro Basante, Sra. e hijos"],
+  ["Señor:", "Armando Basante, Sra. e hijos"],
+  ["Señor:", "Giovany Bastidas, Sra. e hija"],
+  ["Señor:", "Miguel Bravo y Sra."],
+];
+document.getElementById("labels").innerHTML = NOMBRES.map(([t, n]) =>
+  `<div class="label"><div class="sil"></div><div class="flores"></div>
+   <div class="txt"><span class="trato">${t}</span><span class="nombre">${n}</span></div></div>`).join("");
+
+const SELLO = `<svg viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="92" fill="#000" opacity=".18" filter="url(#cera)" transform="translate(2.5 3.5)"/>
+  <circle cx="100" cy="100" r="92" fill="url(#gCera)" filter="url(#cera)"/>
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="2.4" transform="translate(-1 -1)"/>
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#a65f78" stroke-opacity=".55" stroke-width="2.4" transform="translate(1 1)"/>
+  <circle cx="100" cy="100" r="80" fill="none" stroke="url(#gAnillo)" stroke-width="3"/>
+  <circle cx="100" cy="100" r="70" fill="url(#gCentro)"/>
+  <circle cx="100" cy="100" r="70" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.6" transform="translate(-.8 -.8)"/>
+  <circle cx="100" cy="100" r="70" fill="none" stroke="#a65f78" stroke-opacity=".5" stroke-width="1.6" transform="translate(.8 .8)"/>
+  <g font-family="'Great Vibes','Parisienne',cursive" font-size="124" text-anchor="middle">
+    <text x="97" y="136" fill="#a65f78" fill-opacity=".7">L</text>
+    <text x="100.8" y="139" fill="#fff" fill-opacity=".65">L</text>
+    <text x="99" y="137.5" fill="#dca1b4">L</text>
+  </g>
+</svg>`;
+document.getElementById("seals").innerHTML = Array(8).fill(`<div class="seal">${SELLO}</div>`).join("");
+</script>
+</body>
+</html>
