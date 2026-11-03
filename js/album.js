@@ -39,7 +39,7 @@
       c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
       c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
       URL.revokeObjectURL(src);
-      resolve(c.toDataURL('image/jpeg', QUALITY).split(',')[1]);
+      resolve({ datos: c.toDataURL('image/jpeg', QUALITY).split(',')[1], ancho: c.width, alto: c.height });
     };
     img.onerror = () => { URL.revokeObjectURL(src); reject(new Error('No se pudo leer la foto')); };
     img.src = src;
@@ -79,11 +79,11 @@
       const li = queue.children[i], st = li.querySelector('.q-state');
       st.textContent = 'Subiendo…'; li.className = 'q-item is-busy';
       try {
-        const datos = await compress(files[i]);
+        const foto = await compress(files[i]);
         if (!url) { await new Promise(r => setTimeout(r, 500)); }
         else {
           // text/plain evita la verificación previa (CORS) de Apps Script
-          const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ nombre, tipo: 'image/jpeg', datos }) });
+          const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ nombre, tipo: 'image/jpeg', datos: foto.datos, ancho: foto.ancho, alto: foto.alto }) });
           const out = await res.json();
           if (!out.ok) throw new Error(out.error || 'No se pudo guardar');
         }
@@ -116,16 +116,38 @@
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; };
   const CROWN = '<svg class="bk-crown" viewBox="0 0 64 40" aria-hidden="true"><path d="M6 34 10 12l12 11L32 6l10 17 12-11 4 22z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M6 37h52" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="10" cy="10" r="2.6" fill="currentColor"/><circle cx="32" cy="4.5" r="2.6" fill="currentColor"/><circle cx="54" cy="10" r="2.6" fill="currentColor"/></svg>';
 
-  const pageCover = () => el('div', 'pg pg-cover', `${CROWN}<span class="bk-kicker">XV · Luisa María</span><span class="bk-title">Álbum de la fiesta</span><span class="bk-hint">Toca para abrir</span>`);
+  const ORN = '<svg class="bk-orn" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h48M70 6h48" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M60 1l5 5-5 5-5-5z" fill="currentColor"/></svg>';
+  const CORNER = '<svg class="bk-c" viewBox="0 0 40 40" aria-hidden="true"><path d="M3 37V13C3 7 7 3 13 3h24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="13" cy="13" r="2.6" fill="currentColor"/></svg>';
+  const SPARK = '<svg class="bk-spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z" fill="currentColor"/></svg>';
+  const pageCover = () => el('div', 'pg pg-cover', `${CORNER}${CORNER}${CORNER}${CORNER}${SPARK}${SPARK}${SPARK}
+    <img class="bk-corona" src="assets/img/corona-oro.webp" alt="" width="900" height="591">
+    <div class="bk-label">
+      <span class="bk-kicker">Una vez en un sueño</span>
+      <span class="bk-title">Recuerdo de mis XV</span>
+      ${ORN}
+      <span class="bk-name">Luisa María</span>
+      <span class="bk-date">05 · 12 · 2026</span>
+    </div>
+    <span class="bk-hint">Toca para abrir</span>`);
   const pageNote = () => el('div', 'pg pg-note', '<span class="bk-title sm">Recuerdos</span><span class="bk-line">Cada foto es un pedacito de esta noche, vista por todos los que la vivieron.</span>');
   const pageEnd = () => el('div', 'pg pg-note', `${CROWN}<span class="bk-title sm">Gracias</span><span class="bk-line">por cada recuerdo compartido.</span>`);
   const pageBlank = () => el('div', 'pg pg-note');
   const pageEmpty = () => el('div', 'pg pg-note', '<span class="bk-title sm">Pronto…</span><span class="bk-line">Aún no hay fotos. Las que suban los invitados aparecerán aquí.</span>');
+  // Cada foto se muestra en polaroid vertical u horizontal según su forma; las hojas se arman con 2 del mismo tipo
+  function packPages(items) {
+    const q = { v: [], h: [] }, out = [];
+    items.forEach(it => { const k = it.o === 'v' ? 'v' : 'h'; q[k].push(it); if (q[k].length === 2) { out.push(q[k]); q[k] = []; } });
+    [q.v, q.h].forEach(g => g.forEach(it => out.push([it])));   // las que sobran van solas en su hoja
+    return out;
+  }
   function pagePhotos(group, num) {
-    const pg = el('div', 'pg pg-photos');
-    group.forEach((id, k) => {
-      const fig = el('figure', 'pol'); fig.style.setProperty('--r', (k ? 2.2 : -2.2) + 'deg');
-      const im = new Image(); im.alt = 'Foto de la fiesta'; im.decoding = 'async'; im.dataset.id = id; fig.append(im); pg.append(fig);
+    const kind = group.length === 1 ? 'pg-solo' : group[0].o === 'v' && group[1].o === 'v' ? 'pg-vv' : 'pg-hh';
+    const pg = el('div', 'pg pg-photos ' + kind);
+    group.forEach((it, k) => {
+      const fig = el('figure', 'pol ' + (it.o === 'v' ? 'v' : 'h')); fig.style.setProperty('--r', (k ? 2.2 : -2.2) + 'deg');
+      const im = new Image(); im.alt = 'Foto de la fiesta'; im.decoding = 'async'; im.dataset.id = it.id;
+      im.onload = () => { const v = im.naturalHeight > im.naturalWidth * 1.1; fig.classList.toggle('v', v); fig.classList.toggle('h', !v); };  // corrige las que llegaron sin marca
+      fig.append(im); pg.append(fig);
     });
     pg.append(el('span', 'pg-num', `— ${num} —`));
     return pg;
@@ -133,8 +155,7 @@
 
   function build() {
     spread = spreadMq.matches; book.classList.toggle('is-spread', spread);
-    const photoPages = [];
-    for (let i = 0; i < ids.length; i += 2) photoPages.push(pagePhotos(ids.slice(i, i + 2), photoPages.length + 1));
+    const photoPages = packPages(ids).map((g, i) => pagePhotos(g, i + 1));
     if (!photoPages.length) photoPages.push(pageEmpty());
     const pages = spread ? [pageCover(), pageNote(), ...photoPages] : [pageCover(), ...photoPages];
     if (spread && (pages.length + 1) % 2) pages.push(pageBlank());
@@ -202,7 +223,7 @@
       const res = await fetch(url + '?accion=lista');
       const out = await res.json();
       if (!out.ok) return;
-      ids = out.fotos; section.hidden = false; build();
+      ids = out.fotos.map(f => (typeof f === 'string' ? { id: f } : f)).reverse(); section.hidden = false; build();   // de la más antigua a la más nueva
       gmsg.textContent = ids.length ? '' : 'Aún no hay fotos. ¡Sé la primera persona en compartir un recuerdo!';
     } catch (e) { /* sin conexión: el libro simplemente no aparece */ }
   }

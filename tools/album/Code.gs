@@ -43,9 +43,9 @@ function doGet(e) {
     }
     const out = [];
     const it = folder.getFiles();
-    while (it.hasNext()) { const f = it.next(); out.push({ id: f.getId(), t: f.getDateCreated().getTime() }); }
+    while (it.hasNext()) { const f = it.next(); const m = f.getName().match(/_([vh])\.(jpg|png)$/); out.push({ id: f.getId(), t: f.getDateCreated().getTime(), o: m ? m[1] : '' }); }
     out.sort(function (a, b) { return b.t - a.t; });
-    return json_({ ok: true, estado: estado, fotos: out.slice(0, 200).map(function (x) { return x.id; }) });
+    return json_({ ok: true, estado: estado, fotos: out.slice(0, 200).map(function (x) { return { id: x.id, o: x.o }; }) });
   }
   return json_({ ok: true, estado: estado });
 }
@@ -66,7 +66,9 @@ function doPost(e) {
     const nombre = String(body.nombre || 'Invitado').replace(/[^\p{L}\p{N} _-]/gu, '').trim().slice(0, 40) || 'Invitado';
     const stamp = Utilities.formatDate(new Date(), 'America/Bogota', 'yyyy-MM-dd_HH-mm-ss');
     const ext = tipo === 'image/png' ? 'png' : 'jpg';
-    const fileName = nombre + '_' + stamp + '_' + Math.floor(Math.random() * 1000) + '.' + ext;
+    const ancho = Number(body.ancho) || 0, alto = Number(body.alto) || 0;
+    const forma = ancho && alto ? (alto / ancho > 1.1 ? '_v' : '_h') : '';   // vertical u horizontal, para armar las hojas del libro
+    const fileName = nombre + '_' + stamp + '_' + Math.floor(Math.random() * 1000) + forma + '.' + ext;
 
     getFolder_().createFile(Utilities.newBlob(bytes, tipo, fileName));
     return json_({ ok: true });
