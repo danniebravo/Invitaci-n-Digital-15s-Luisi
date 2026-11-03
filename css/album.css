@@ -34,3 +34,6 @@
 .album-msg { font-size: 20px; color: var(--rose); min-height: 1.4em; }
 .album-demo { margin-top: 18px; font-size: 16px; color: var(--ink-soft); font-style: italic; }
 .album-back { display: inline-block; margin-top: 26px; font-family: var(--f-caps); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-3); text-decoration: underline; text-underline-offset: 4px; }
+
+/* Computador o celular horizontal: el libro se abre con dos hojas, así que la columna se ensancha */
+@media (min-width: 900px) and (orientation: landscape) { .album { max-width: 980px; } }

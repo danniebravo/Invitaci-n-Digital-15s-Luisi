@@ -101,30 +101,110 @@
     if (ok) loadGallery();
   });
 
-  /* Galería: fotos que ya subieron los invitados (miniaturas de Drive) */
-  const gallery = $('#gallery'), grid = $('#galleryGrid'), gmsg = $('#galleryMsg');
+  /* ---------- Álbum de la fiesta: libro con hojas que se pasan ---------- */
+  const section = $('#gallery'), book = $('#book'), stage = $('#bookStage'), counter = $('#bookCount'), gmsg = $('#galleryMsg');
+  const btnPrev = $('#bookPrev'), btnNext = $('#bookNext'), lb = $('#lightbox'), lbImg = $('#lightboxImg');
   // Drive limita las miniaturas cuando se piden muchas juntas: se reintenta alternando las dos direcciones
-  const THUMBS = [id => `https://drive.google.com/thumbnail?id=${id}&sz=w500`, id => `https://lh3.googleusercontent.com/d/${id}=w500`];
-  function thumb(img, id, n = 0) {
-    img.onerror = () => { if (n < 5) setTimeout(() => thumb(img, id, n + 1), 500 + n * 700); };
-    img.src = THUMBS[n % 2](id) + (n && n % 2 === 0 ? '&r=' + n : '');
+  const THUMBS = [(id, s) => `https://drive.google.com/thumbnail?id=${id}&sz=w${s}`, (id, s) => `https://lh3.googleusercontent.com/d/${id}=w${s}`];
+  function thumb(img, id, size, n = 0) {
+    img.onerror = () => { if (n < 5) setTimeout(() => thumb(img, id, size, n + 1), 500 + n * 700); };
+    img.src = THUMBS[n % 2](id, size) + (n && n % 2 === 0 ? '&r=' + n : '');
   }
+  const spreadMq = matchMedia('(min-width: 900px) and (orientation: landscape)');
+  let ids = [], leaves = [], cur = 0, maxCur = 0, spread = false;
+
+  const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; };
+  const CROWN = '<svg class="bk-crown" viewBox="0 0 64 40" aria-hidden="true"><path d="M6 34 10 12l12 11L32 6l10 17 12-11 4 22z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M6 37h52" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="10" cy="10" r="2.6" fill="currentColor"/><circle cx="32" cy="4.5" r="2.6" fill="currentColor"/><circle cx="54" cy="10" r="2.6" fill="currentColor"/></svg>';
+
+  const pageCover = () => el('div', 'pg pg-cover', `${CROWN}<span class="bk-kicker">XV · Luisa María</span><span class="bk-title">Álbum de la fiesta</span><span class="bk-hint">Toca para abrir</span>`);
+  const pageNote = () => el('div', 'pg pg-note', '<span class="bk-title sm">Recuerdos</span><span class="bk-line">Cada foto es un pedacito de esta noche, vista por todos los que la vivieron.</span>');
+  const pageEnd = () => el('div', 'pg pg-note', `${CROWN}<span class="bk-title sm">Gracias</span><span class="bk-line">por cada recuerdo compartido.</span>`);
+  const pageBlank = () => el('div', 'pg pg-note');
+  const pageEmpty = () => el('div', 'pg pg-note', '<span class="bk-title sm">Pronto…</span><span class="bk-line">Aún no hay fotos. Las que suban los invitados aparecerán aquí.</span>');
+  function pagePhotos(group, num) {
+    const pg = el('div', 'pg pg-photos');
+    group.forEach((id, k) => {
+      const fig = el('figure', 'pol'); fig.style.setProperty('--r', (k ? 2.2 : -2.2) + 'deg');
+      const im = new Image(); im.alt = 'Foto de la fiesta'; im.decoding = 'async'; im.dataset.id = id; fig.append(im); pg.append(fig);
+    });
+    pg.append(el('span', 'pg-num', `— ${num} —`));
+    return pg;
+  }
+
+  function build() {
+    spread = spreadMq.matches; book.classList.toggle('is-spread', spread);
+    const photoPages = [];
+    for (let i = 0; i < ids.length; i += 2) photoPages.push(pagePhotos(ids.slice(i, i + 2), photoPages.length + 1));
+    if (!photoPages.length) photoPages.push(pageEmpty());
+    const pages = spread ? [pageCover(), pageNote(), ...photoPages] : [pageCover(), ...photoPages];
+    if (spread && (pages.length + 1) % 2) pages.push(pageBlank());
+    pages.push(pageEnd());
+    stage.replaceChildren(); leaves = [];
+    const face = (pg, side) => { const f = el('div', 'face ' + side); f.append(pg); return f; };
+    if (spread) {
+      for (let k = 0; k < pages.length; k += 2) { const lf = el('div', 'leaf'); lf.append(face(pages[k], 'front'), face(pages[k + 1], 'back')); leaves.push(lf); }
+    } else {
+      pages.forEach(pg => { const lf = el('div', 'leaf'); lf.append(face(pg, 'front')); leaves.push(lf); });
+    }
+    stage.append(...leaves);
+    maxCur = spread ? leaves.length : leaves.length - 1;
+    cur = Math.min(cur, maxCur);
+    renderBook();
+  }
+
+  function fixZ() { leaves.forEach((lf, i) => { lf.style.zIndex = i < cur ? i + 1 : leaves.length - i; }); }
+  function renderBook() {
+    leaves.forEach((lf, i) => lf.classList.toggle('is-flipped', i < cur));
+    fixZ();
+    book.dataset.pos = cur === 0 ? 'start' : cur >= maxCur ? 'end' : 'mid';
+    btnPrev.disabled = cur === 0; btnNext.disabled = cur >= maxCur;
+    counter.textContent = cur === 0 ? 'Toca el libro para abrirlo' : `Hoja ${cur + 1} de ${maxCur + 1}`;
+    leaves.slice(Math.max(0, cur - 1), cur + 3).forEach(lf => lf.querySelectorAll('img[data-id]:not([src])').forEach(im => thumb(im, im.dataset.id, 800)));
+  }
+  function go(d) {
+    const n = Math.max(0, Math.min(maxCur, cur + d));
+    if (n === cur) return;
+    const flipping = leaves[d > 0 ? cur : cur - 1];
+    cur = n; renderBook();
+    if (flipping) { flipping.style.zIndex = leaves.length + 2; setTimeout(fixZ, 500); }
+  }
+
+  // Gestos: arrastrar de lado pasa la hoja; tocar un lado también; tocar una foto la abre en grande
+  let sx = 0, sy = 0, swiped = false;
+  stage.addEventListener('pointerdown', e => { sx = e.clientX; sy = e.clientY; swiped = false; });
+  stage.addEventListener('pointerup', e => {
+    const dx = e.clientX - sx, dy = e.clientY - sy;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { swiped = true; go(dx < 0 ? 1 : -1); }
+  });
+  stage.addEventListener('click', e => {
+    if (swiped) return;
+    const im = e.target.closest('img[data-id]');
+    if (im && im.complete && im.naturalWidth > 1) { openPhoto(im.dataset.id); return; }
+    const r = stage.getBoundingClientRect();
+    go(cur === 0 || e.clientX > r.left + r.width / 2 ? 1 : -1);
+  });
+  btnPrev.addEventListener('click', () => go(-1));
+  btnNext.addEventListener('click', () => go(1));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePhoto();
+    else if (!lb.hidden) return;
+    else if (e.key === 'ArrowRight') go(1);
+    else if (e.key === 'ArrowLeft') go(-1);
+  });
+  function openPhoto(id) { lbImg.removeAttribute('src'); thumb(lbImg, id, 1600); lb.hidden = false; }
+  function closePhoto() { lb.hidden = true; lbImg.removeAttribute('src'); }
+  lb.addEventListener('click', closePhoto);
+  spreadMq.addEventListener('change', build);
+
   async function loadGallery() {
     if (!url) return;
     try {
       const res = await fetch(url + '?accion=lista');
       const out = await res.json();
       if (!out.ok) return;
-      gallery.hidden = false;
-      grid.replaceChildren(...out.fotos.map(id => {
-        const a = document.createElement('a');
-        a.href = `https://drive.google.com/file/d/${id}/view`; a.target = '_blank'; a.rel = 'noopener';
-        const img = new Image();
-        img.alt = 'Foto de la fiesta'; img.decoding = 'async';
-        thumb(img, id); a.append(img); return a;
-      }));
-      gmsg.textContent = out.fotos.length ? '' : 'Aún no hay fotos. ¡Sé la primera persona en compartir un recuerdo!';
-    } catch (e) { /* sin conexión: la galería simplemente no aparece */ }
+      ids = out.fotos; section.hidden = false; build();
+      gmsg.textContent = ids.length ? '' : 'Aún no hay fotos. ¡Sé la primera persona en compartir un recuerdo!';
+    } catch (e) { /* sin conexión: el libro simplemente no aparece */ }
   }
   loadGallery();
 })();

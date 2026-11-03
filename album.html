@@ -13,8 +13,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Miss+Fajardose&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=30">
-  <link rel="stylesheet" href="css/album.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=32">
+  <link rel="stylesheet" href="css/album.css?v=4">
 </head>
 <body class="album-page">
   <main class="album">
@@ -55,16 +55,27 @@
     </form>
 
     <section class="album-gallery" id="gallery" hidden>
-      <h2 class="album-gallery-title">Fotos de la fiesta</h2>
-      <div class="gallery-grid" id="galleryGrid"></div>
+      <h2 class="album-gallery-title">Álbum de la fiesta</h2>
+      <div class="book" id="book" data-pos="start">
+        <div class="book-stage" id="bookStage"></div>
+      </div>
+      <div class="book-controls">
+        <button class="book-nav" id="bookPrev" type="button" aria-label="Hoja anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <p class="book-count" id="bookCount" role="status"></p>
+        <button class="book-nav" id="bookNext" type="button" aria-label="Hoja siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
       <p class="album-msg" id="galleryMsg" role="status"></p>
     </section>
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lightbox-close" type="button" aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+      <img id="lightboxImg" alt="Foto de la fiesta">
+    </div>
 
     <p class="album-demo" id="demoNote" hidden>Vista previa: el álbum aún no está conectado a Google Drive.</p>
     <a class="album-back" href="index.html">Volver a la invitación</a>
   </main>
 
   <script src="js/album-config.js?v=3"></script>
-  <script src="js/album.js?v=6"></script>
+  <script src="js/album.js?v=7"></script>
 </body>
 </html>
