@@ -68,13 +68,10 @@ def main():
     if modo == "hero":
         cut = matte(abrir(FV / "lu.JPG", 1300), (640, 880))
         cut = cut.crop(cut.getbbox()); cut.thumbnail((1400, 1800))
-        # zonas a borrar (px del resultado): arete/hebra suelta del lado izquierdo de la cara, pedacito gris del peinado
+        # arete diminuto del lado izquierdo (de quien mira): elipse pequeña con borde suave, lejos de la mejilla
         al = np.asarray(cut.getchannel("A")).astype(np.float32)
-        z = np.zeros_like(al)
-        for x0, y0, x1, y1 in [(612, 112, 637, 250), (650, 244, 680, 278)]:
-            z[y0:y1, x0:x1] = 1
-        al *= 1 - cv2.GaussianBlur(z, (0, 0), 2)
-        cut.putalpha(Image.fromarray(al.astype(np.uint8)))
+        z = np.zeros_like(al); cv2.ellipse(z, (670, 260), (9, 15), 0, 0, 360, 1, -1)
+        cut.putalpha(Image.fromarray((al * (1 - cv2.GaussianBlur(z, (0, 0), 1.5))).astype(np.uint8)))
         cut.save(IMG / "luisa-xv.webp", "WEBP", quality=90, method=6)
         print("hero", cut.size)
     elif modo == "final":
