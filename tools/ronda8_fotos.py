@@ -68,10 +68,7 @@ def main():
     if modo == "hero":
         cut = matte(abrir(FV / "lu.JPG", 1300), (640, 880))
         cut = cut.crop(cut.getbbox()); cut.thumbnail((1400, 1800))
-        # arete diminuto del lado izquierdo (de quien mira): elipse pequeña con borde suave, lejos de la mejilla
-        al = np.asarray(cut.getchannel("A")).astype(np.float32)
-        z = np.zeros_like(al); cv2.ellipse(z, (670, 260), (9, 15), 0, 0, 360, 1, -1)
-        cut.putalpha(Image.fromarray((al * (1 - cv2.GaussianBlur(z, (0, 0), 1.5))).astype(np.uint8)))
+        # sin borrados manuales: el matte ya deja el rostro completo y sin arete suelto (la elipse anterior se comía la mejilla)
         cut.save(IMG / "luisa-xv.webp", "WEBP", quality=90, method=6)
         print("hero", cut.size)
     elif modo == "final":
@@ -82,8 +79,10 @@ def main():
         cut.save(IMG / "luisa-final.webp", "WEBP", quality=90, method=6)
         print("final", cut.size)
     elif modo == "marco":
-        im = abrir(FV / "marco.JPG", 1500)
-        im.save(ROOT / "tools" / "_marco_full.jpg", quality=92)
+        # recorte con la cara al centro del óvalo (x=0..3375 de la foto de 4000x6000)
+        im = ImageOps.exif_transpose(Image.open(FV / "marco.JPG")).convert("RGB")
+        im = im.crop((0, 0, 3375, 4500)).resize((900, 1200), Image.LANCZOS)
+        im.save(IMG / "foto-marco.webp", "WEBP", quality=86, method=6)
         print("marco", im.size)
 
 

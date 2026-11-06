@@ -114,15 +114,22 @@
   let ids = [], leaves = [], cur = 0, maxCur = 0, spread = false;
 
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; };
-  const CROWN = '<svg class="bk-crown" viewBox="0 0 64 40" aria-hidden="true"><path d="M6 34 10 12l12 11L32 6l10 17 12-11 4 22z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M6 37h52" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="10" cy="10" r="2.6" fill="currentColor"/><circle cx="32" cy="4.5" r="2.6" fill="currentColor"/><circle cx="54" cy="10" r="2.6" fill="currentColor"/></svg>';
+  const CROWN = '<img class="bk-crown" src="assets/img/corona-oro.webp" alt="" width="900" height="591">';
 
   const ORN = '<svg class="bk-orn" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h48M70 6h48" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M60 1l5 5-5 5-5-5z" fill="currentColor"/></svg>';
   const pageCover = () => el('div', 'pg pg-cover', `<div class="bk-center">
       <img class="bk-corona" src="assets/img/corona-oro.webp" alt="" width="900" height="591">
-      <span class="bk-mis">Mis XV</span>
+      <span class="bk-kicker">Una vez en un sueño</span>
+      <span class="bk-mis">Mis XV años</span>
       <span class="bk-name">Luisa María</span>
-      ${ORN}
+      <img class="bk-castle" src="assets/img/castillo-libro.webp" alt="" width="763" height="305">
       <span class="bk-date">05 · 12 · 2026</span>
+    </div>`);
+  const pageBack = () => el('div', 'pg pg-cover pg-back', `<div class="bk-center">
+      ${CROWN.replace('bk-crown', 'bk-corona')}
+      <img class="bk-sello" src="assets/img/sello-l.webp" alt="" width="360" height="360">
+      ${ORN}
+      <span class="bk-date">Mis XV · Luisa María</span>
     </div>`);
   const pageNote = () => el('div', 'pg pg-note', '<span class="bk-title sm">Recuerdos</span><span class="bk-line">Cada foto es un pedacito de esta noche, vista por todos los que la vivieron.</span>');
   const pageEnd = () => el('div', 'pg pg-note', `${CROWN}<span class="bk-title sm">Gracias</span><span class="bk-line">por cada recuerdo compartido.</span>`);
@@ -153,8 +160,8 @@
     const photoPages = packPages(ids).map((g, i) => pagePhotos(g, i + 1));
     if (!photoPages.length) photoPages.push(pageEmpty());
     const pages = spread ? [pageCover(), pageNote(), ...photoPages] : [pageCover(), ...photoPages];
-    if (spread && (pages.length + 1) % 2) pages.push(pageBlank());
-    pages.push(pageEnd());
+    if (spread && pages.length % 2) pages.push(pageBlank());
+    pages.push(pageEnd(), pageBack());
     stage.replaceChildren(); leaves = [];
     const face = (pg, side) => { const f = el('div', 'face ' + side); f.append(pg); return f; };
     if (spread) {

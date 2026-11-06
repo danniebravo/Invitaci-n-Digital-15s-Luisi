@@ -351,7 +351,8 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 .scroll-body {
   position: relative; z-index: 2; margin: -15px 0;
   background-color: var(--parch);
-  background-image: var(--paper), radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(160, 110, 50, .28) 100%);
+  background-image: radial-gradient(120% 90% at 50% 50%, transparent 60%, rgba(160, 110, 50, .22) 100%), url(../assets/img/pergamino.webp);
+  background-size: 100% 100%, 100% 100%;
   box-shadow: inset 0 18px 18px -14px rgba(110, 70, 25, .35), inset 0 -18px 18px -14px rgba(110, 70, 25, .35);
 }
 .scroll-inner { padding: 46px 26px 44px; text-align: center; }
@@ -538,7 +539,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
    ========================================================= */
 .end {
   position: relative; overflow: hidden; min-height: 100vh; min-height: 100svh;
-  background: linear-gradient(180deg, var(--cream) 0%, #f6d6e0 20%, #d895ad 44%, #9c4f74 66%, var(--night-2) 84%, var(--night) 100%);
+  background: linear-gradient(180deg, var(--cream) 0%, #fbe3ea 24%, #f3bfd0 52%, #e29bb7 80%, #cc7a9d 100%);
   display: flex; flex-direction: column; align-items: center;
 }
 .end .stars { top: 40%; }
@@ -790,7 +791,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 
 /* ===== Ronda 5 ===== */
 /* Foto del marco */
-.medallion-photo img { object-position: 50% 30%; }
+.medallion-photo img { object-position: 50% 30%; transform: translateX(4%) scale(1.1); }
 
 /* Frase del sueño separada de las nubes */
 .dream .lead { margin-top: 58px; }
@@ -952,16 +953,18 @@ img { -webkit-user-drag: none; }
 .bk-crown { width: 22%; min-width: 54px; color: #f3d9a0; }
 .pg-note .bk-crown { width: 16%; color: var(--gold-2, #c9a24b); }
 .bk-kicker { font-family: var(--f-caps); font-size: 11px; font-size: 3cqw; letter-spacing: .3em; text-transform: uppercase; }
-/* Tapa: libro de cuentos rosado con marco ornamentado y panel crema */
-.pg-cover { padding: 0; justify-content: center; background: url(../assets/img/tapa-album.svg) 100% 0 / 94% 100% no-repeat, linear-gradient(90deg, #f7c4d5, #f7c4d5); }
-.pg-cover::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6%; background: linear-gradient(90deg, #e58cac 0, #f1adc3 60%, #f8c6d6 100%); box-shadow: inset -2px 0 4px rgba(120, 40, 70, .28), inset 1px 0 0 rgba(255, 255, 255, .35); }
-.pg-cover::after { content: ""; position: absolute; left: 3.2%; top: 4%; bottom: 4%; width: 0; border-left: 1px solid rgba(120, 40, 70, .22); border-right: 1px solid rgba(255, 255, 255, .35); }
-.bk-center { position: absolute; left: 26%; right: 19%; top: 22%; bottom: 22%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1.2cqw; }
-.bk-corona { width: 34%; margin-bottom: 1cqw; filter: drop-shadow(0 2px 4px rgba(110, 50, 60, .3)); }
-.bk-mis { font-family: "UnifrakturCook", var(--f-script); font-weight: 700; font-size: 44px; font-size: 15.5cqw; line-height: .95; color: #d4749a; }
-.bk-name { font-family: "UnifrakturCook", var(--f-script); font-weight: 700; font-size: 26px; font-size: 9.6cqw; line-height: 1; color: #d4749a; }
-.bk-orn { width: 22cqw; color: #d49a8c; margin: 1cqw 0; }
-.bk-date { font-family: var(--f-caps); font-weight: 600; font-size: 11px; font-size: 3.4cqw; letter-spacing: .28em; color: #b9577f; }
+/* Tapa y contratapa: marco de peonías de la invitación impresa sobre crema */
+.pg-cover { padding: 0; justify-content: center; background: url(../assets/img/tapa-peonias.webp) center / 100% 100% no-repeat, #f7efe4; }
+.pg-cover::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5%; background: linear-gradient(90deg, rgba(120, 50, 70, .28), rgba(120, 50, 70, 0)); pointer-events: none; }
+.bk-center { position: absolute; left: 16%; right: 13%; top: 11%; bottom: 11%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1.4cqw; }
+.bk-corona { width: 24%; margin-bottom: .5cqw; filter: drop-shadow(0 2px 3px rgba(110, 70, 30, .3)); }
+.pg-cover .bk-kicker { font-size: 8px; font-size: 2.5cqw; letter-spacing: .3em; color: #b08a3a; }
+.bk-mis { font-family: var(--f-script); font-weight: 400; font-size: 34px; font-size: 12.5cqw; line-height: 1; color: #b8903c; }
+.bk-name { font-family: var(--f-script); font-weight: 400; font-size: 40px; font-size: 14.5cqw; line-height: 1; color: #d4749a; margin-bottom: 1cqw; }
+.bk-castle { width: 100%; margin: 1cqw 0; }
+.bk-sello { width: 46%; margin: 4cqw 0; filter: drop-shadow(0 3px 5px rgba(120, 50, 70, .3)); }
+.bk-orn { width: 22cqw; color: #c9a25a; margin: 1cqw 0; }
+.bk-date { font-family: var(--f-caps); font-weight: 600; font-size: 11px; font-size: 3.2cqw; letter-spacing: .26em; color: #a8395e; }
 .book-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 22px; }
 .book-count { font-family: var(--f-caps); font-size: 12px; letter-spacing: .14em; color: var(--rose); min-width: 190px; }
 .book-nav { width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid rgba(201, 86, 122, .55); background: rgba(255, 255, 255, .8); color: var(--rose); display: grid; place-items: center; cursor: pointer; box-shadow: 0 4px 12px rgba(201, 86, 122, .2); }
@@ -973,3 +976,18 @@ img { -webkit-user-drag: none; }
 .lightbox-close { position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, .9); color: var(--rose); display: grid; place-items: center; cursor: pointer; }
 .lightbox-close svg { width: 20px; height: 20px; }
 @media (prefers-reduced-motion: reduce) { .leaf, .book-stage { transition: none !important; } }
+
+/* =========================================================
+   Ronda 10 · cierre: jardín claro (sin video)
+   ========================================================= */
+.end-text { color: #a8395e; text-shadow: 0 0 18px rgba(255, 244, 248, .95), 0 0 4px rgba(255, 244, 248, .9); }
+.end .end-sign { background: rgba(168, 57, 94, .82); color: #fff6ec; text-shadow: none; }
+.end-garden { height: min(66svh, 600px); margin-top: 8px; }
+.eg-glow { position: absolute; left: 50%; bottom: 6%; width: 130%; height: 92%; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(255, 246, 236, .8), rgba(255, 236, 226, .3) 60%, transparent 100%); }
+.eg-rama { position: absolute; bottom: 5%; height: auto; width: min(70vw, 440px); pointer-events: none; filter: drop-shadow(0 10px 20px rgba(140, 60, 90, .25)); }
+.eg-rama-l { left: 0; }
+.eg-rama-r { right: 0; }
+.eg-girl { position: absolute; left: 50%; bottom: 3%; width: min(104vw, 470px); height: auto; transform: translateX(-50%); filter: drop-shadow(0 12px 26px rgba(130, 50, 85, .3)); -webkit-mask-image: linear-gradient(180deg, #000 76%, transparent 98%); mask-image: linear-gradient(180deg, #000 76%, transparent 98%); }
+.eg-banda { position: absolute; left: 50%; bottom: -3%; width: max(130%, 760px); max-width: none; transform: translateX(-50%); pointer-events: none; }
+.end-garden .petal-field { z-index: 1; } .end-garden .sparkles { z-index: 4; }
+@media (min-width: 761px) { .eg-girl { width: 470px; } .eg-rama { width: min(38vw, 540px); } .end-garden { height: 640px; } }
