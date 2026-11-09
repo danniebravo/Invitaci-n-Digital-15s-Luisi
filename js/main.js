@@ -16,7 +16,22 @@
   window.scrollTo(0, 0);
 
   /* ---------------- RSVP ---------------- */
-  $('#rsvpBtn').href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(WA_TEXT)}`;
+  // Invitación personalizada: /?para=Nombre&c=2 (sin parámetros se ve la invitación general)
+  const q = new URLSearchParams(location.search);
+  const guest = (q.get('para') || '').replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 80);
+  const seats = Math.max(0, Math.min(20, parseInt(q.get('c'), 10) || 0));
+  let waText = WA_TEXT;
+  if (guest) {
+    $('#introParaName').textContent = guest;
+    $('#introPara').hidden = false;
+    waText = `Hola, confirmo mi asistencia a los XV años de Luisa María.\n\nInvitado: ${guest}` + (seats ? `\nLugares reservados: ${seats}` : '') + '\nAsistiremos: ';
+  }
+  if (guest && seats) {
+    const n = $('#placesNote');
+    n.textContent = seats === 1 ? 'Tienes 1 lugar reservado a tu nombre.' : `Tienes ${seats} lugares reservados para ti y los tuyos.`;
+    n.hidden = false;
+  }
+  $('#rsvpBtn').href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waText)}`;
 
   /* ---------------- Partículas ---------------- */
   const fill = (el, make) => {
@@ -192,7 +207,7 @@
     if (!hasGSAP) { finishIntro(); return; }
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete: finishIntro });
-    tl.to('#introHint, .intro-sound', { opacity: 0, duration: .3 })
+    tl.to('#introHint, .intro-sound, #introPara', { opacity: 0, duration: .3 })
       .to('.seal-l', { x: -46, y: 30, rotation: -35, opacity: 0, duration: .8, ease: 'power2.in' }, 0)
       .to('.seal-r', { x: 46, y: 34, rotation: 38, opacity: 0, duration: .8, ease: 'power2.in' }, 0)
       .to('.seal-crown', { opacity: 0, duration: .2 }, 0)

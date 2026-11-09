@@ -6,3 +6,5 @@ tools
 .playwright-mcp
 .env*
 *.md
+invitados-links.csv
+*.xlsx
