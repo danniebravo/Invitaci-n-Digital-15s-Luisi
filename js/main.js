@@ -24,6 +24,7 @@
   if (guest) {
     $('#introParaName').textContent = guest;
     $('#introPara').hidden = false;
+    const lf = $('#letterFor'); lf.textContent = guest; lf.hidden = false;   // también en la carta que sale del sobre
     waText = `Hola, confirmo mi asistencia a los XV años de Luisa María.\n\nInvitado: ${guest}` + (seats ? `\nLugares reservados: ${seats}` : '') + '\nAsistiremos: ';
   }
   if (guest && seats) {

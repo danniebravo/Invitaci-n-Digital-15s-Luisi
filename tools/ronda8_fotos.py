@@ -79,9 +79,9 @@ def main():
         cut.save(IMG / "luisa-final.webp", "WEBP", quality=90, method=6)
         print("final", cut.size)
     elif modo == "marco":
-        # recorte con la cara al centro del óvalo (x=0..3375 de la foto de 4000x6000)
-        im = ImageOps.exif_transpose(Image.open(FV / "marco.JPG")).convert("RGB")
-        im = im.crop((0, 0, 3375, 4500)).resize((900, 1200), Image.LANCZOS)
+        # marcoo.png (1024x1536): recorte 3:4 con la cara (x≈440) al centro del óvalo
+        im = ImageOps.exif_transpose(Image.open(FV / "marcoo.png")).convert("RGB")
+        im = im.crop((0, 0, 880, 1173)).resize((900, 1200), Image.LANCZOS)
         im.save(IMG / "foto-marco.webp", "WEBP", quality=86, method=6)
         print("marco", im.size)
 

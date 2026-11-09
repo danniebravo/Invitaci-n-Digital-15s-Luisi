@@ -791,7 +791,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 
 /* ===== Ronda 5 ===== */
 /* Foto del marco */
-.medallion-photo img { object-position: 50% 30%; transform: translateX(4%) scale(1.1); }
+.medallion-photo img { object-position: 50% 30%; }
 
 /* Frase del sueño separada de las nubes */
 .dream .lead { margin-top: 58px; }
@@ -1002,3 +1002,5 @@ img { -webkit-user-drag: none; }
 .intro-para b { font-family: var(--f-script); font-weight: 400; font-size: clamp(26px, 8vw, 34px); line-height: 1.15; color: #fff1f6; text-shadow: 0 0 18px rgba(255, 180, 210, .55), 0 1px 6px rgba(40, 12, 30, .7); }
 .places-note { margin: 4px auto 14px; max-width: 340px; font-family: var(--f-body); font-style: italic; font-weight: 500; font-size: 20px; line-height: 1.35; color: var(--rose); text-shadow: 0 0 14px rgba(255, 248, 240, 1), 0 0 4px rgba(255, 248, 240, .9); }
 .places-note[hidden] { display: none; }
+.letter-for { margin-top: 6px; padding: 5px 14px 0; max-width: 92%; border-top: 1px solid rgba(201, 162, 75, .5); font-family: var(--f-script); font-size: clamp(19px, 5.6vw, 24px); line-height: 1.15; color: var(--rose); text-wrap: balance; }
+.letter-for[hidden] { display: none; }
