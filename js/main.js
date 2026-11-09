@@ -20,18 +20,12 @@
   // Invitación personalizada: /?para=Nombre&c=2 (sin parámetros se ve la invitación general)
   const q = new URLSearchParams(location.search);
   const guest = (q.get('para') || '').replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 80);
-  const seats = Math.max(0, Math.min(20, parseInt(q.get('c'), 10) || 0));
   let waText = WA_TEXT;
   if (guest) {
     $('#introParaName').textContent = guest;
     $('#introPara').hidden = false;
     const lf = $('#letterFor'); lf.textContent = guest; lf.hidden = false;   // también en la carta que sale del sobre
-    waText = `Hola, confirmo mi asistencia a los XV años de Luisa María.\n\nInvitado: ${guest}` + (seats ? `\nLugares reservados: ${seats}` : '') + '\nAsistiremos: ';
-  }
-  if (guest && seats) {
-    const n = $('#placesNote');
-    n.textContent = seats === 1 ? 'Tienes 1 lugar reservado a tu nombre.' : `Tienes ${seats} lugares reservados para ti y los tuyos.`;
-    n.hidden = false;
+    waText = `Hola, confirmo mi asistencia a los XV años de Luisa María.\n\nInvitado: ${guest}` + '\nPersonas que asistirán (nombre de cada una): ';
   }
   $('#rsvpBtn').href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waText)}`;
 
