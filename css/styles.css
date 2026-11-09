@@ -982,15 +982,16 @@ img { -webkit-user-drag: none; }
    ========================================================= */
 .end-text { color: #a8395e; text-shadow: 0 0 18px rgba(255, 244, 248, .95), 0 0 4px rgba(255, 244, 248, .9); }
 .end .end-sign { background: rgba(168, 57, 94, .82); color: #fff6ec; text-shadow: none; }
-.end-garden { height: min(66svh, 600px); margin-top: 8px; }
+.end-garden { position: relative; height: min(66svh, 600px); margin-top: 8px; overflow: hidden; -webkit-mask-image: none; mask-image: none; }
 .eg-glow { position: absolute; left: 50%; bottom: 6%; width: 130%; height: 92%; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(255, 246, 236, .8), rgba(255, 236, 226, .3) 60%, transparent 100%); }
 .eg-rama { position: absolute; bottom: 5%; height: auto; width: min(70vw, 440px); pointer-events: none; filter: drop-shadow(0 10px 20px rgba(140, 60, 90, .25)); }
 .eg-rama-l { left: 0; }
 .eg-rama-r { right: 0; }
-.eg-girl { position: absolute; left: 50%; bottom: 3%; width: min(104vw, 470px); height: auto; transform: translateX(-50%); filter: drop-shadow(0 12px 26px rgba(130, 50, 85, .3)); -webkit-mask-image: linear-gradient(180deg, #000 76%, transparent 98%); mask-image: linear-gradient(180deg, #000 76%, transparent 98%); }
-.eg-banda { position: absolute; left: 50%; bottom: -3%; width: max(130%, 760px); max-width: none; transform: translateX(-50%); pointer-events: none; }
-.end-garden .petal-field { z-index: 1; } .end-garden .sparkles { z-index: 4; }
-@media (min-width: 761px) { .eg-girl { width: 470px; } .eg-rama { width: min(38vw, 540px); } .end-garden { height: 640px; } }
+/* ella se dimensiona por el alto del recuadro: nunca se sale ni queda bajo el texto de arriba */
+.eg-girl { position: absolute; left: 50%; bottom: 3%; height: 94%; width: auto; max-width: none; transform: translateX(-50%); filter: drop-shadow(0 12px 26px rgba(130, 50, 85, .3)); -webkit-mask-image: linear-gradient(180deg, #000 76%, transparent 98%); mask-image: linear-gradient(180deg, #000 76%, transparent 98%); }
+.eg-banda { position: absolute; left: 50%; bottom: -3%; width: 135%; max-width: 1100px; transform: translateX(-50%); pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); }
+.end-garden .petal-field, .end-garden .sparkles { z-index: 1; }
+@media (min-width: 761px) { .eg-rama { width: min(38vw, 540px); } .end-garden { height: 700px; } .eg-banda { width: 100%; } }
 
 /* =========================================================
    Ronda 11 · invitación personalizada (/?para=Nombre&c=2)
