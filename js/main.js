@@ -9,7 +9,8 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const rand = (a, b) => a + Math.random() * (b - a);
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // La invitación siempre se anima (Android activa 'reducir movimiento' solo con el ahorro de batería y apagaba todo). Versión calmada: /?calma=1
+  const reduce = new URLSearchParams(location.search).get('calma') === '1';
   const hasGSAP = !!(window.gsap && window.ScrollTrigger);
 
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';

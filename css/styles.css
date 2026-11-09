@@ -575,9 +575,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
   .end-cloud-l { left: -8vw; } .end-cloud-r { right: -8vw; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .drift-a, .drift-b, .petal, .fly, .spark, .star, .rain-env, .dove-slot { animation: none !important; }
-}
+
 
 /* =========================================================
    RONDA 2 · nubes, flores, baile, palomas, álbum
@@ -619,9 +617,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 
 @media (min-width: 761px) {
 }
-@media (prefers-reduced-motion: reduce) {
-  .star-deco { animation: none !important; }
-}
+
 .end-once { width: min(62vw, 280px); margin: 0 auto 20px; filter: drop-shadow(0 4px 18px rgba(255, 230, 170, .5)); }
 .parents { padding-top: 70px; }
 
@@ -688,7 +684,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
   .dream-scene { height: 620px; max-width: 900px; margin: 0 auto; }
   .dream-cloud-top { left: 4vw; } .dream-cloud-bottom { right: 4vw; }
 }
-@media (prefers-reduced-motion: reduce) { .flyer, .sky-cloud { animation: none !important; } }
+
 
 /* ===== Ronda 4 ===== */
 
@@ -781,7 +777,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 .rsvp-card .body-text { font-size: 18px; margin-bottom: 18px; }
 .rsvp-card .btn-big { width: 100%; padding: 0 16px; font-size: 12.5px; }
 
-@media (prefers-reduced-motion: reduce) { .scroll-arrow { animation: none; } }
+
 @media (min-width: 761px) {
   .dream .cloud-band { left: 50%; width: 100vw; height: 200px; object-fit: cover; object-position: 50% 0%; }
   .dream .cloud-band-top { top: -40px; transform: translateX(-50%) scaleY(-1); }
@@ -850,7 +846,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 .end-sign { display: inline-block; font-size: 13.5px; letter-spacing: .28em; color: #fff6e3; padding: 7px 16px; border-radius: 999px;
   background: rgba(40, 12, 32, .38); text-shadow: 0 1px 3px rgba(40, 10, 30, .95), 0 0 12px rgba(40, 10, 30, .7); }
 
-@media (prefers-reduced-motion: reduce) { .dove, .more-arrow, .castle-float { animation: none !important; } }
+
 
 /* Confirma: botón otra vez arriba con el texto; abajo solo la flecha */
 .rsvp-top .btn-big { width: min(320px, 100%); margin-top: 20px; }
@@ -975,7 +971,7 @@ img { -webkit-user-drag: none; }
 .lightbox img { max-width: 94vw; max-height: 88vh; border-radius: 6px; box-shadow: 0 20px 50px rgba(0, 0, 0, .5); }
 .lightbox-close { position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, .9); color: var(--rose); display: grid; place-items: center; cursor: pointer; }
 .lightbox-close svg { width: 20px; height: 20px; }
-@media (prefers-reduced-motion: reduce) { .leaf, .book-stage { transition: none !important; } }
+
 
 /* =========================================================
    Ronda 10 · cierre: jardín claro (sin video)
@@ -1002,7 +998,7 @@ img { -webkit-user-drag: none; }
 .intro-para b { font-family: var(--f-script); font-weight: 400; font-size: clamp(26px, 8vw, 34px); line-height: 1.15; color: #fff1f6; text-shadow: 0 0 18px rgba(255, 180, 210, .55), 0 1px 6px rgba(40, 12, 30, .7); }
 .places-note { margin: 4px auto 14px; max-width: 340px; font-family: var(--f-body); font-style: italic; font-weight: 500; font-size: 20px; line-height: 1.35; color: var(--rose); text-shadow: 0 0 14px rgba(255, 248, 240, 1), 0 0 4px rgba(255, 248, 240, .9); }
 .places-note[hidden] { display: none; }
-.letter-for { margin-top: 6px; padding: 5px 14px 0; max-width: 92%; border-top: 1px solid rgba(201, 162, 75, .5); font-family: var(--f-script); font-size: clamp(19px, 5.6vw, 24px); line-height: 1.15; color: var(--rose); text-wrap: balance; }
+.letter-for { margin: 0 0 8px; padding: 0 14px 7px; max-width: 92%; border-bottom: 1px solid rgba(201, 162, 75, .5); font-family: var(--f-script); font-size: clamp(19px, 5.6vw, 24px); line-height: 1.15; color: var(--rose); text-wrap: balance; }
 .letter-for[hidden] { display: none; }
 /* Nombres de invitados: letra clara con espacio entre palabras (la cursiva decorativa juntaba "Joven" con "Urbano") */
 .intro-para b { font-family: var(--f-body); font-style: italic; font-weight: 600; font-size: clamp(22px, 6.4vw, 28px); letter-spacing: .02em; word-spacing: .16em; line-height: 1.2; }
