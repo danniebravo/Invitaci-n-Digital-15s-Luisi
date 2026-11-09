@@ -5,7 +5,7 @@
  */
 const FOLDER_NAME = 'XV Luisa María · Fotos de invitados';
 const OPEN_FROM = new Date('2026-12-05T00:00:00-05:00');
-const OPEN_UNTIL = new Date('2026-12-07T00:00:00-05:00'); // hasta el 6 de dic a las 23:59
+const OPEN_UNTIL = new Date('2026-12-07T00:00:00-05:00'); // abierto hasta el 6 de dic a las 23:59
 const MAX_BYTES = 12 * 1024 * 1024;
 
 function getFolder_() {
