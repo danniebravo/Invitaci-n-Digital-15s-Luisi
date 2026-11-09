@@ -1004,3 +1004,6 @@ img { -webkit-user-drag: none; }
 .places-note[hidden] { display: none; }
 .letter-for { margin-top: 6px; padding: 5px 14px 0; max-width: 92%; border-top: 1px solid rgba(201, 162, 75, .5); font-family: var(--f-script); font-size: clamp(19px, 5.6vw, 24px); line-height: 1.15; color: var(--rose); text-wrap: balance; }
 .letter-for[hidden] { display: none; }
+/* Nombres de invitados: letra clara con espacio entre palabras (la cursiva decorativa juntaba "Joven" con "Urbano") */
+.intro-para b { font-family: var(--f-body); font-style: italic; font-weight: 600; font-size: clamp(22px, 6.4vw, 28px); letter-spacing: .02em; word-spacing: .16em; line-height: 1.2; }
+.letter-for { font-family: var(--f-body); font-style: italic; font-weight: 600; font-size: clamp(16px, 4.6vw, 20px); letter-spacing: .02em; word-spacing: .16em; line-height: 1.2; }
