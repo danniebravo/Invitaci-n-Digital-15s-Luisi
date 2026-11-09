@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Parisienne&text=A&display=swap" rel="stylesheet">
 
   <link rel="preload" href="assets/img/valle-poster.webp" as="image">
-  <link rel="stylesheet" href="css/styles.css?v=47">
+  <link rel="stylesheet" href="css/styles.css?v=51">
 </head>
 <body class="is-locked">
 
@@ -207,9 +207,10 @@
       <h2 class="title split">Once upon a dream</h2>
       <div class="dream-scene">
         <img class="cloud-band cloud-band-top" src="assets/img/nubes-banda-rosa.webp" alt="" width="2000" height="560">
-        <video id="dreamVideo" muted loop playsinline preload="metadata" poster="assets/img/vals-bosque-poster.webp" aria-label="Aurora y el príncipe bailando en el bosque">
+        <video id="dreamVideo" muted loop playsinline webkit-playsinline preload="metadata" poster="assets/img/vals-bosque-poster.webp" aria-label="Aurora y el príncipe bailando en el bosque">
           <source src="assets/video/vals-bosque.mp4" type="video/mp4">
         </video>
+        <img class="dream-anim" id="dreamAnim" data-src="assets/img/vals-bosque-anim.webp" alt="Aurora y el príncipe bailando en el bosque" width="420" height="648" hidden>
         <img class="cloud-band cloud-band-bottom" src="assets/img/nubes-banda-rosa.webp" alt="" width="2000" height="560">
       </div>
       <p class="lead reveal">“Te conozco, bailé contigo una vez en un sueño…”</p>
@@ -383,9 +384,9 @@
     </section>
   </main>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-  <script src="js/main.js?v=12"></script>
+  <script src="assets/js/vendor/gsap.min.js?v=3.12.5"></script>
+  <script src="assets/js/vendor/ScrollTrigger.min.js?v=3.12.5"></script>
+  <script src="assets/js/vendor/lenis.min.js?v=1.1.13"></script>
+  <script src="js/main.js?v=14"></script>
 </body>
 </html>

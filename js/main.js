@@ -114,12 +114,30 @@
     if (img.complete && img.naturalWidth === 0 && img.getAttribute('src')) retry(img);
   });
 
-  /* ---------------- Videos decorativos: solo cuando se ven ---------------- */
+  /* ---------------- Videos decorativos: arrancan al verse; si el celular bloquea el autoplay hay respaldo ---------------- */
+  const lazyVideos = ['#dateVideo', '#dreamVideo'].map(sel => $(sel)).filter(Boolean);
+  lazyVideos.forEach(v => { v.muted = true; v.defaultMuted = true; v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', ''); });
+  const visibleVideos = new Set();
+  const dreamAnim = $('#dreamAnim');
+  let dreamFallback = false;
+  // El baile pasa a un WebP animado (las imágenes animadas no las bloquea el ahorro de batería)
+  const useDreamFallback = () => {
+    const v = $('#dreamVideo');
+    if (dreamFallback || !dreamAnim || !v) return;
+    dreamFallback = true;
+    dreamAnim.src = dreamAnim.dataset.src; dreamAnim.hidden = false; v.hidden = true;
+  };
+  const retryOnTouch = () => addEventListener('touchend', () => visibleVideos.forEach(v => v.play().catch(() => {})), { once: true, passive: true });
+  const tryPlay = v => {
+    const p = v.play();
+    if (p && p.catch) p.catch(() => { v.classList.add('is-still'); if (v.id === 'dreamVideo') useDreamFallback(); retryOnTouch(); });
+    if (v.id === 'dreamVideo') setTimeout(() => { if (visibleVideos.has(v) && v.paused) useDreamFallback(); }, 1500);
+  };
   if (!reduce && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver(entries => entries.forEach(e => {
-      if (e.isIntersecting) e.target.play().catch(() => {}); else e.target.pause();
+      if (e.isIntersecting) { visibleVideos.add(e.target); tryPlay(e.target); } else { visibleVideos.delete(e.target); e.target.pause(); }
     }), { rootMargin: '120px' });
-    ['#dateVideo', '#dreamVideo'].forEach(s => { const v = $(s); if (v) io.observe(v); });
+    lazyVideos.forEach(v => io.observe(v));
   }
   musicBtn.addEventListener('click', () => {
     if (song.paused) { wantMusic = true; playSong(); } else { wantMusic = false; song.pause(); setMusicUI(false); }
@@ -160,12 +178,13 @@
 
   /* ---------------- Video del hero ---------------- */
   const video = $('#heroVideo');
-  const playVideo = () => { if (!reduce) video.play().catch(() => {}); };
+  const playVideo = () => { if (!reduce) video.play().catch(() => video.classList.add('is-still')); };   // sin video: el póster se mueve despacio
 
   /* ---------------- Lenis ---------------- */
   let lenis = null;
   if (hasGSAP) {
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });   // la barra del navegador móvil no desajusta las animaciones
     if (window.Lenis && !reduce) {
       lenis = new Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
       lenis.on('scroll', ScrollTrigger.update);
@@ -205,6 +224,8 @@
     song.preload = 'auto';
     playSong();
     playVideo();
+    // Un play() dentro del toque desbloquea estos videos para los play() posteriores (iOS / ahorro de batería)
+    if (!reduce) lazyVideos.forEach(v => { const p = v.play(); if (p && p.then) p.then(() => { if (!visibleVideos.has(v)) v.pause(); }).catch(() => {}); });
 
     if (!hasGSAP) { finishIntro(); return; }
 
@@ -226,70 +247,83 @@
       .to(heroWords, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.1, stagger: .12, clearProps: 'filter,willChange' }, 2.9)
       .to('#heroGirl', { opacity: 1, y: 0, duration: 1.4 }, 3.1)
       .to('.hero-bloom', { opacity: 1, y: 0, duration: 1.4, stagger: .1 }, 3.2);
+    // Si la animación se atasca (celular lento), se abre igual y se muestra todo
+    setTimeout(() => {
+      if (introDone) return;
+      tl.kill();
+      gsap.set([heroWords, '#heroGirl', '.hero-bloom', '.cloud-l', '.cloud-r'], { clearProps: 'all' });
+      finishIntro();
+    }, 9000);
   };
   seal.addEventListener('click', open);
   $('#envelope').addEventListener('click', open);
 
   /* ---------------- Animaciones con scroll ---------------- */
   function setupScroll() {
-    // Hero parallax
-    gsap.timeline({ scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } })
-      .to('#heroTitle', { yPercent: -50, ease: 'none' }, 0)
-      .to('#heroGirl', { yPercent: 8, ease: 'none' }, 0)
-      .to('.hero-media', { yPercent: 10, ease: 'none' }, 0);
-    $$('.hero [data-par]').forEach(el => gsap.to(el, { y: +el.dataset.par * 2, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } }));
+    // Cada bloque va aislado: si uno falla en un celular, los demás siguen funcionando
+    const safe = fn => { try { fn(); } catch (e) { console.warn('animación omitida', e); } };
+    const touch = matchMedia('(hover: none)').matches;           // en táctiles se evita el blur animado (pesado en gama baja)
+    const soft = touch ? {} : { filter: 'blur(4px)', clearProps: 'filter' };
+    const softW = touch ? { clearProps: 'willChange' } : { filter: 'blur(8px)', clearProps: 'filter,willChange' };
+
+    safe(() => {   // Hero parallax
+      gsap.timeline({ scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } })
+        .to('#heroTitle', { yPercent: -50, ease: 'none' }, 0)
+        .to('#heroGirl', { yPercent: 8, ease: 'none' }, 0)
+        .to('.hero-media', { yPercent: 10, ease: 'none' }, 0);
+      $$('.hero [data-par]').forEach(el => gsap.to(el, { y: +el.dataset.par * 2, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } }));
+    });
 
     if (reduce) { ScrollTrigger.refresh(); return; }
 
-    // Reveals
-    // Entradas discretas: el momento protagonista es la carta y el pergamino
-    $$('.reveal').forEach(el => gsap.from(el, { opacity: .15, y: 12, filter: 'blur(4px)', duration: .9, ease: 'expo.out', clearProps: 'filter', scrollTrigger: { trigger: el, start: 'top 90%' } }));
-    $$('.split').forEach(el => {
-      if (el.closest('#hero')) return;
-      gsap.from($$('.w', el), { opacity: 0, y: 16, filter: 'blur(8px)', duration: 1.1, stagger: .07, ease: 'expo.out', clearProps: 'filter,willChange', scrollTrigger: { trigger: el, start: 'top 88%' } });
+    safe(() => {   // Entradas discretas: el momento protagonista es la carta y el pergamino
+      $$('.reveal').forEach(el => gsap.from(el, { opacity: .15, y: 12, duration: .9, ease: 'expo.out', ...soft, scrollTrigger: { trigger: el, start: 'top 90%' } }));
+      $$('.split').forEach(el => {
+        if (el.closest('#hero')) return;
+        gsap.from($$('.w', el), { opacity: 0, y: 16, duration: 1.1, stagger: .07, ease: 'expo.out', ...softW, scrollTrigger: { trigger: el, start: 'top 88%' } });
+      });
     });
 
-    // Pergamino que se desenrolla
-    const body = $('#scrollBody');
-    const roll = $('.scroll-roll-bottom');
-    gsap.timeline({ scrollTrigger: { trigger: '#scroll', start: 'top 82%', end: 'top 12%', scrub: .6, invalidateOnRefresh: true } })
-      .fromTo(body, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none' }, 0)
-      .fromTo(roll, { y: () => -(body.offsetHeight - 30) }, { y: 0, ease: 'none' }, 0);
-    gsap.from('.msg-text', { opacity: 0, y: 14, stagger: .2, duration: 1, scrollTrigger: { trigger: '#scroll', start: 'top 40%' } });
+    safe(() => {   // Pergamino que se desenrolla
+      const body = $('#scrollBody');
+      const roll = $('.scroll-roll-bottom');
+      gsap.timeline({ scrollTrigger: { trigger: '#scroll', start: 'top 82%', end: 'top 12%', scrub: .6, invalidateOnRefresh: true } })
+        .fromTo(body, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none' }, 0)
+        .fromTo(roll, { y: () => -(body.offsetHeight - 30) }, { y: 0, ease: 'none' }, 0);
+      gsap.from('.msg-text', { opacity: 0, y: 14, stagger: .2, duration: 1, scrollTrigger: { trigger: '#scroll', start: 'top 40%' } });
+    });
 
-    // Polaroids
-    gsap.from('.polaroid', { y: 70, rotation: 0, opacity: 0, duration: 1.1, stagger: .14, ease: 'back.out(1.4)', scrollTrigger: { trigger: '#polaroids', start: 'top 85%' } });
+    safe(() => gsap.from('.polaroid', { y: 70, rotation: 0, opacity: 0, duration: 1.1, stagger: .14, ease: 'back.out(1.4)', scrollTrigger: { trigger: '#polaroids', start: 'top 85%' } }));
 
-    // Hadas volando
-    const fly = (sel, fromX, toX, fromY, toY) => gsap.fromTo(sel, { x: fromX, y: fromY }, { x: toX, y: toY, ease: 'none', scrollTrigger: { trigger: '#fecha', start: 'top bottom', end: 'bottom top', scrub: 1 } });
-    fly('.fairy-rosa', '-70vw', '10vw', 120, -60);
-    fly('.fairy-verde', '70vw', '-10vw', 80, -40);
-    fly('.fairy-azul', '-60vw', '6vw', 140, -80);
-    $$('.fairy').forEach((f, i) => gsap.to(f, { rotation: i % 2 ? 6 : -6, duration: 2.4 + i * .4, yoyo: true, repeat: -1, ease: 'sine.inOut' }));
+    safe(() => {   // Hadas volando
+      const fly = (sel, fromX, toX, fromY, toY) => gsap.fromTo(sel, { x: fromX, y: fromY }, { x: toX, y: toY, ease: 'none', scrollTrigger: { trigger: '#fecha', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+      fly('.fairy-rosa', '-70vw', '10vw', 120, -60);
+      fly('.fairy-verde', '70vw', '-10vw', 80, -40);
+      fly('.fairy-azul', '-60vw', '6vw', 140, -80);
+      $$('.fairy').forEach((f, i) => gsap.to(f, { rotation: i % 2 ? 6 : -6, duration: 2.4 + i * .4, yoyo: true, repeat: -1, ease: 'sine.inOut' }));
+    });
 
-    // Línea del itinerario
-    gsap.to('#tlFill', { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '#timeline', start: 'top 70%', end: 'bottom 60%', scrub: .5 } });
-    $$('.tl-item').forEach(el => gsap.from(el, { opacity: 0, x: -24, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 86%' } }));
+    safe(() => {   // Línea del itinerario
+      gsap.to('#tlFill', { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '#timeline', start: 'top 70%', end: 'bottom 60%', scrub: .5 } });
+      $$('.tl-item').forEach(el => gsap.from(el, { opacity: 0, x: -24, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 86%' } }));
+    });
 
-    // Recepción
-    // Libro pop-up: el castillo se despliega hacia arriba desde las páginas
-    // Ligado al scroll: al bajar se abre, al subir se vuelve a cerrar
-    gsap.timeline({ scrollTrigger: { trigger: '#popupBook', start: 'top 95%', end: 'top 40%', scrub: .8 } })
-      .fromTo('.book-base', { rotationX: 62, opacity: .6 }, { rotationX: 0, opacity: 1, ease: 'power2.out' }, 0)
-      .fromTo('.place-castle', { scaleY: .08, scaleX: .55, opacity: 0, transformOrigin: '50% 74%' }, { scaleY: 1, scaleX: 1, opacity: 1, ease: 'back.out(1.6)' }, .15);
-    // Abierto, el castillo respira suave
-    gsap.to('.castle-float', { y: -7, duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-    gsap.from('#placeCard', { y: 50, opacity: 0, filter: 'blur(8px)', duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: '#placeCard', start: 'top 88%' } });
+    safe(() => {   // Libro pop-up: al bajar se abre y el castillo se despliega; al subir se cierra. Abierto, respira suave
+      gsap.timeline({ scrollTrigger: { trigger: '#popupBook', start: 'top 95%', end: 'top 40%', scrub: .8 } })
+        .fromTo('.book-base', { rotationX: 62, opacity: .6 }, { rotationX: 0, opacity: 1, ease: 'power2.out' }, 0)
+        .fromTo('.place-castle', { scaleY: .08, scaleX: .55, opacity: 0, transformOrigin: '50% 74%' }, { scaleY: 1, scaleX: 1, opacity: 1, ease: 'back.out(1.6)' }, .15);
+      gsap.to('.castle-float', { y: -7, duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+      gsap.from('#placeCard', { y: 50, opacity: 0, ...(touch ? {} : { filter: 'blur(8px)' }), duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: '#placeCard', start: 'top 88%' } });
+    });
 
-    // Vestimenta
-    gsap.from('.couple', { scale: .82, opacity: 0, duration: 1.4, ease: 'power3.out', scrollTrigger: { trigger: '.couple', start: 'top 85%' } });
+    safe(() => gsap.from('.couple', { scale: .82, opacity: 0, duration: 1.4, ease: 'power3.out', scrollTrigger: { trigger: '.couple', start: 'top 85%' } }));
 
-    // Nubes de transición: se deslizan suave al pasar (parallax)
-
-    // Cierre: el árbol crece
-
+    // Las imágenes con carga diferida cambian el alto de la página: se recalculan las posiciones (con pausa para no recalcular a cada una)
     ScrollTrigger.refresh();
-    addEventListener('load', () => ScrollTrigger.refresh());
+    let rt; const refreshSoon = () => { clearTimeout(rt); rt = setTimeout(() => ScrollTrigger.refresh(), 400); };
+    document.addEventListener('load', refreshSoon, true);
+    addEventListener('load', refreshSoon);
+    addEventListener('orientationchange', () => setTimeout(() => ScrollTrigger.refresh(), 300));
   }
 
   // Enlaces internos con scroll suave

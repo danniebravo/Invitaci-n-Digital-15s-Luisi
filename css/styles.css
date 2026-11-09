@@ -629,7 +629,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
 /* Baile integrado al fondo con nubes arriba y abajo */
 .dream { padding-left: 0; padding-right: 0; overflow: hidden; }
 .dream-scene { position: relative; width: 100%; height: min(130vw, 640px); margin: -10px 0 0; }
-.dream-scene video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%;
+.dream-scene video, .dream-scene .dream-anim { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18%, #000 80%, transparent 100%), linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
   -webkit-mask-composite: source-in;
   mask-image: linear-gradient(to bottom, transparent 0, #000 18%, #000 80%, transparent 100%), linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
@@ -1003,3 +1003,20 @@ img { -webkit-user-drag: none; }
 /* Nombres de invitados: letra clara con espacio entre palabras (la cursiva decorativa juntaba "Joven" con "Urbano") */
 .intro-para b { font-family: var(--f-body); font-style: italic; font-weight: 600; font-size: clamp(22px, 6.4vw, 28px); letter-spacing: .02em; word-spacing: .16em; line-height: 1.2; }
 .letter-for { font-family: var(--f-body); font-style: italic; font-weight: 600; font-size: clamp(16px, 4.6vw, 20px); letter-spacing: .02em; word-spacing: .16em; line-height: 1.2; }
+
+/* Respaldo del baile (WebP animado) cuando el celular bloquea el video */
+.dream-anim[hidden] { display: none; }
+@keyframes kenburns { from { transform: scale(1.03); } to { transform: scale(1.12) translate(-1.5%, -1%); } }
+video.is-still { animation: kenburns 18s ease-in-out infinite alternate; }
+
+/* Celular horizontal: título a un lado y ella al otro, para que no se corte */
+@media (orientation: landscape) and (max-height: 520px) {
+  .hero { height: 100vh; height: 100svh; min-height: 0; }
+  .hero-stack { flex-direction: row; align-items: stretch; justify-content: center; gap: 3vw; padding: 12px 4vw 0; }
+  .hero-title { align-self: flex-start; flex: 0 1 50%; margin-top: 4px; }
+  .hero-lead { font-size: 18px; }
+  .hero-name { font-size: clamp(40px, 13vh, 60px); }
+  .hero-surname { font-size: 11px; }
+  .hero-girl { flex: 0 1 auto; width: auto; margin: 0; align-self: stretch; }
+  .hero-girl img { max-width: none; }
+}
