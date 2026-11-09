@@ -229,5 +229,5 @@
       gmsg.textContent = ids.length ? '' : 'Aún no hay fotos. ¡Sé la primera persona en compartir un recuerdo!';
     } catch (e) { /* sin conexión: el libro simplemente no aparece */ }
   }
-  loadGallery();
+  if (!form.hidden) loadGallery();   // el álbum solo se ve cuando está abierto (5 y 6 de dic)
 })();
