@@ -16,6 +16,8 @@
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   window.scrollTo(0, 0);
 
+  if (new URLSearchParams(location.search).get('cierre') === 'nuevo') document.documentElement.classList.add('cn');   // vista previa del cierre nuevo
+
   /* ---------------- RSVP ---------------- */
   // Invitación personalizada: /?para=Nombre&c=2 (sin parámetros se ve la invitación general)
   const q = new URLSearchParams(location.search);

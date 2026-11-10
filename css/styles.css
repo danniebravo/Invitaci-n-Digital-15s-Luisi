@@ -1020,3 +1020,19 @@ video.is-still { animation: kenburns 18s ease-in-out infinite alternate; }
   .hero-girl { flex: 0 1 auto; width: auto; margin: 0; align-self: stretch; }
   .hero-girl img { max-width: none; }
 }
+
+/* Cierre nuevo (vista previa con ?cierre=nuevo): ella al centro rodeada de flores, sin nubes ni espacio sobrante */
+.cn-only { display: none; }
+.cn .end { min-height: 0; }
+.cn .end-cloud, .cn .eg-banda, .cn .eg-glow { display: none; }
+.cn .end-inner { padding-top: 70px; }
+.cn .end-garden { height: min(78svh, 640px); margin-top: 0; }
+.cn .eg-girl { bottom: 0; height: 88%; -webkit-mask-image: none; mask-image: none; z-index: 2; }
+.cn .eg-rama { z-index: 1; }
+.cn .eg-rama-l { top: auto; bottom: -4%; left: -9%; width: min(58vw, 420px); z-index: 1; }
+.cn .eg-rama-r { bottom: -4%; right: -9%; width: min(58vw, 420px); z-index: 1; }
+.cn .cn-only { display: block; position: absolute; height: auto; pointer-events: none; filter: drop-shadow(0 8px 16px rgba(140, 60, 90, .22)); }
+.cn .cn-branch-l { top: -2%; left: -8%; width: min(46vw, 300px); z-index: 1; }
+.cn .cn-branch-r { top: -2%; right: -8%; width: min(46vw, 300px); transform: scaleX(-1); z-index: 1; }
+.cn .cn-bush-c { bottom: -13%; left: 50%; width: min(64vw, 400px); transform: translateX(-50%); z-index: 3; }
+.cn .foot { position: absolute; left: 50%; bottom: 14px; z-index: 5; width: auto; margin: 0; padding: 6px 14px; transform: translateX(-50%); white-space: nowrap; border-radius: 999px; background: rgba(168, 57, 94, .82); text-shadow: none; }
