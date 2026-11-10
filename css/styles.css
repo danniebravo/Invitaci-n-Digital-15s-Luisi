@@ -1042,5 +1042,4 @@ video.is-still { animation: kenburns 18s ease-in-out infinite alternate; }
 .cn .cn-t7 { left: -16%; bottom: -4%; width: 50vw; z-index: 3; filter: drop-shadow(0 8px 14px rgba(120, 50, 80, .25)); }
 .cn .cn-t8 { right: -16%; bottom: -4%; width: 52vw; z-index: 3; filter: drop-shadow(0 8px 14px rgba(120, 50, 80, .25)); }
 @media (min-width: 761px) { .cn .cn-c1 { width: 28vw; } .cn .cn-c2 { width: 30vw; } .cn .cn-t1 { width: 16vw; } .cn .cn-t2 { width: 17vw; } .cn .cn-t5 { width: 26vw; left: 2%; } .cn .cn-t6 { width: 27vw; right: 0; } .cn .cn-t7 { width: 26vw; left: -3%; } .cn .cn-t8 { width: 27vw; right: -3%; } }
-.cn .foot { position: absolute; left: 14px; bottom: 14px; z-index: 5; width: auto; margin: 0; padding: 6px 12px; white-space: nowrap; letter-spacing: .22em; border-radius: 999px; background: rgba(168, 57, 94, .82); text-shadow: none; }
-@media (min-width: 761px) { .cn .foot { left: 50%; transform: translateX(-50%); } }
+.cn .foot { position: absolute; left: 50%; transform: translateX(-50%); bottom: 14px; z-index: 5; width: auto; margin: 0; padding: 6px 12px; white-space: nowrap; letter-spacing: .14em; font-size: 10px; border-radius: 999px; background: rgba(168, 57, 94, .82); text-shadow: none; }
