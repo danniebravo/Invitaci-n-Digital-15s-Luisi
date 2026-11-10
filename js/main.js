@@ -31,7 +31,7 @@
     waText = head;
     if (seats === 1) {
       const n = $('#placesNote');
-      n.textContent = 'Hay 1 cupo reservado únicamente para quien recibe esta tarjeta.';
+      n.textContent = 'Hay un cupo reservado únicamente para quien recibe esta tarjeta.';
       n.hidden = false;
     }
   }
