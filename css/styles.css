@@ -326,7 +326,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
    MENSAJE · PERGAMINO
    ========================================================= */
 .msg { padding-top: 40px; display: flex; flex-direction: column; align-items: center; }
-.corner { position: absolute !important; z-index: 1 !important; pointer-events: none; opacity: .9; }
+.corner { position: absolute !important; z-index: 1 !important; pointer-events: none; opacity: .9; -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 96%); mask-image: linear-gradient(to bottom, #000 62%, transparent 96%); }
 .corner-tl { top: -10px; left: -18vw; width: 68vw; max-width: 420px; }
 .corner-tr { top: -30px; right: -18vw; width: 52vw; max-width: 360px; opacity: .8; transform: scaleX(-1); }
 .petal { position: absolute; top: -20px; width: 11px; height: 9px; border-radius: 80% 0 80% 0; background: linear-gradient(135deg, #f9d2df, #f0a7bf); opacity: .85; animation: fall linear infinite; }
