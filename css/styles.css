@@ -1027,20 +1027,23 @@ video.is-still { animation: kenburns 18s ease-in-out infinite alternate; }
 .cn .end-cloud, .cn .eg-banda, .cn .eg-glow { display: none; }
 .cn .end-inner { padding-top: 70px; }
 .cn .end-garden { height: min(88svh, 720px); margin-top: 0; }
-.cn .eg-girl { bottom: 0; height: 96%; -webkit-mask-image: none; mask-image: none; z-index: 2; }
+.cn .eg-girl { bottom: 0; height: 78%; -webkit-mask-image: none; mask-image: none; z-index: 2; }
 .cn .eg-rama { z-index: 1; }
 .cn .eg-rama { display: none; }
 .cn .cn-only { display: block; position: absolute; height: auto; pointer-events: none; }
-/* bosque: filas de árboles, los del fondo más chicos y desvanecidos; ella queda al centro */
-.cn .cn-tree { transform-origin: bottom center; }
-.cn .cn-t1 { left: -4%;  bottom: 46%; width: 40vw; opacity: .55; filter: blur(1.2px) brightness(1.15); z-index: 0; }
-.cn .cn-t2 { right: -4%; bottom: 48%; width: 42vw; opacity: .55; filter: blur(1.2px) brightness(1.15); transform: scaleX(-1); z-index: 0; }
-.cn .cn-t3 { left: 22%; bottom: 60%; width: 30vw; opacity: .4; filter: blur(1.6px) brightness(1.2); z-index: 0; }
-.cn .cn-t4 { right: 20%; bottom: 62%; width: 28vw; opacity: .4; filter: blur(1.6px) brightness(1.2); transform: scaleX(-1); z-index: 0; }
-.cn .cn-t5 { left: -16%; bottom: 20%; width: 60vw; opacity: .9; z-index: 1; }
-.cn .cn-t6 { right: -18%; bottom: 18%; width: 62vw; opacity: .9; transform: scaleX(-1); z-index: 1; }
-.cn .cn-t7 { left: -34%; bottom: -10%; width: 74vw; z-index: 3; filter: drop-shadow(0 8px 14px rgba(120, 50, 80, .25)); }
-.cn .cn-t8 { right: -36%; bottom: -12%; width: 76vw; transform: scaleX(-1); z-index: 3; filter: drop-shadow(0 8px 14px rgba(120, 50, 80, .25)); }
-@media (min-width: 761px) { .cn .cn-t1 { width: 14vw; } .cn .cn-t2 { width: 15vw; } .cn .cn-t3 { width: 11vw; } .cn .cn-t4 { width: 10vw; } .cn .cn-t5 { width: 24vw; left: 2%; } .cn .cn-t6 { width: 25vw; right: 0; } .cn .cn-t7 { width: 34vw; left: -8%; } .cn .cn-t8 { width: 36vw; right: -10%; } }
+/* ambiente: nubes arriba, cerezos detrás de ella, flores abajo (sin verde) */
+.cn .cn-cloud { z-index: 0; }
+.cn .cn-c1 { left: -14%; top: -4%; width: 56vw; opacity: .95; }
+.cn .cn-c2 { right: -16%; top: 0; width: 60vw; opacity: .95; }
+.cn .cn-c3 { left: 22%; top: -6%; width: 54vw; opacity: .85; }
+.cn .cn-t1 { left: -4%;  bottom: 38%; width: 36vw; opacity: .6; filter: blur(1px) brightness(1.1); z-index: 0; }
+.cn .cn-t2 { right: -4%; bottom: 40%; width: 38vw; opacity: .6; filter: blur(1px) brightness(1.1); transform: scaleX(-1); z-index: 0; }
+.cn .cn-t3 { left: 17%; bottom: 52%; width: 24vw; opacity: .45; filter: blur(1.4px) brightness(1.15); z-index: 0; }
+.cn .cn-t4 { right: 15%; bottom: 54%; width: 22vw; opacity: .45; filter: blur(1.4px) brightness(1.15); transform: scaleX(-1); z-index: 0; }
+.cn .cn-t5 { left: -10%; bottom: 20%; width: 54vw; z-index: 1; }
+.cn .cn-t6 { right: -12%; bottom: 18%; width: 56vw; transform: scaleX(-1); z-index: 1; }
+.cn .cn-t7 { left: -16%; bottom: -4%; width: 56vw; z-index: 3; filter: drop-shadow(0 8px 14px rgba(120, 50, 80, .25)); }
+.cn .cn-t8 { right: -16%; bottom: -4%; width: 58vw; z-index: 3; filter: drop-shadow(0 8px 14px rgba(120, 50, 80, .25)); }
+@media (min-width: 761px) { .cn .cn-c1 { width: 28vw; } .cn .cn-c2 { width: 30vw; } .cn .cn-c3 { width: 24vw; } .cn .cn-t1 { width: 16vw; } .cn .cn-t2 { width: 17vw; } .cn .cn-t3 { width: 12vw; } .cn .cn-t4 { width: 11vw; } .cn .cn-t5 { width: 26vw; left: 2%; } .cn .cn-t6 { width: 27vw; right: 0; } .cn .cn-t7 { width: 26vw; left: -3%; } .cn .cn-t8 { width: 27vw; right: -3%; } }
 .cn .foot { position: absolute; left: 14px; bottom: 14px; z-index: 5; width: auto; margin: 0; padding: 6px 12px; white-space: nowrap; letter-spacing: .22em; border-radius: 999px; background: rgba(168, 57, 94, .82); text-shadow: none; }
 @media (min-width: 761px) { .cn .foot { left: 50%; transform: translateX(-50%); } }
