@@ -566,7 +566,7 @@ body.is-locked #app { transform: scale(.9); filter: blur(6px); border-radius: 28
   .hero-bloom { width: 34vw; }
   .hero-bloom-l { left: -6vw; } .hero-bloom-r { right: -6vw; }
   .polaroids { justify-content: center; overflow: visible; padding: 30px 20px; }
-  .polaroid { flex: 0 0 min(236px, 17.4vw); }
+  .polaroid { flex: 0 0 min(236px, 14.4vw); }
   .swipe-hint { display: none; }
   .fairy-rosa { right: 8vw; } .fairy-verde { left: 6vw; } .fairy-azul { right: 14vw; }
   .countdown { gap: 14px; max-width: 560px; }
