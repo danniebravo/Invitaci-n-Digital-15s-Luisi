@@ -27,12 +27,13 @@
     $('#introPara').hidden = false;
     const lf = $('#letterFor'); lf.textContent = guest; lf.hidden = false;   // también en la carta que sale del sobre
     const head = `Hola, confirmo mi asistencia a los XV años de Luisa María.\n\nInvitado: ${guest}`;
-    // 1 cupo: solo quien recibe la tarjeta, sin acompañante. 2 o más (familias): se piden los nombres.
-    waText = seats === 1 ? head + '\nAsistiré: ' : seats > 1 ? head + '\nPersonas que asistirán (nombre de cada una): ' : head + '\nAsistiremos: ';
-    const n = $('#placesNote');
-    if (seats === 1) n.textContent = 'Hay 1 cupo reservado únicamente para quien recibe esta tarjeta.';
-    else if (seats > 1) n.textContent = `Hay ${seats} cupos reservados para tu familia. Al confirmar, escribe el nombre de cada persona que asistirá.`;
-    n.hidden = !seats;
+    // Solo jóvenes (c=1) ven el aviso de cupo único; familias y señores solo confirman, sin pedir ni permitir acompañantes.
+    waText = head;
+    if (seats === 1) {
+      const n = $('#placesNote');
+      n.textContent = 'Hay 1 cupo reservado únicamente para quien recibe esta tarjeta.';
+      n.hidden = false;
+    }
   }
   $('#rsvpBtn').href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waText)}`;
 
