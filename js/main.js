@@ -20,14 +20,31 @@
   // Invitación personalizada: /?para=Nombre&c=2 (sin parámetros se ve la invitación general)
   const q = new URLSearchParams(location.search);
   const guest = (q.get('para') || '').replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 80);
+  const seats = Math.max(0, Math.min(20, parseInt(q.get('c'), 10) || 0));
   let waText = WA_TEXT;
   if (guest) {
     $('#introParaName').textContent = guest;
     $('#introPara').hidden = false;
     const lf = $('#letterFor'); lf.textContent = guest; lf.hidden = false;   // también en la carta que sale del sobre
-    waText = `Hola, confirmo mi asistencia a los XV años de Luisa María.\n\nInvitado: ${guest}` + '\nPersonas que asistirán (nombre de cada una): ';
+    const head = `Hola, confirmo mi asistencia a los XV años de Luisa María.\n\nInvitado: ${guest}`;
+    // 1 cupo: solo quien recibe la tarjeta, sin acompañante. 2 o más (familias): se piden los nombres.
+    waText = seats === 1 ? head + '\nAsistiré: ' : seats > 1 ? head + '\nPersonas que asistirán (nombre de cada una): ' : head + '\nAsistiremos: ';
+    const n = $('#placesNote');
+    if (seats === 1) n.textContent = 'Hay 1 cupo reservado únicamente para quien recibe esta tarjeta.';
+    else if (seats > 1) n.textContent = `Hay ${seats} cupos reservados para tu familia. Al confirmar, escribe el nombre de cada persona que asistirá.`;
+    n.hidden = !seats;
   }
   $('#rsvpBtn').href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(waText)}`;
+
+  /* ---------------- Disuasión de copia (no es seguridad real: en el navegador todo el código es visible) ---------------- */
+  if (!/^(localhost|127\.|192\.168\.)/.test(location.hostname)) {
+    const stop = e => e.preventDefault();
+    ['contextmenu', 'dragstart', 'copy', 'cut'].forEach(t => document.addEventListener(t, stop));
+    document.addEventListener('keydown', e => {
+      const k = e.key.toLowerCase();
+      if (e.key === 'F12' || (e.ctrlKey && ['u', 's', 'p'].includes(k)) || ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i', 'j', 'c'].includes(k))) e.preventDefault();
+    });
+  }
 
   /* ---------------- Partículas ---------------- */
   const fill = (el, make) => {
