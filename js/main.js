@@ -17,6 +17,7 @@
   window.scrollTo(0, 0);
 
   document.documentElement.classList.add('cn');   // cierre nuevo (estilos .cn)
+  if (new URLSearchParams(location.search).get('flores') === 'grande') document.documentElement.classList.add('xl');   // vista previa: matas más grandes
 
   /* ---------------- RSVP ---------------- */
   // Invitación personalizada: /?para=Nombre&c=2 (sin parámetros se ve la invitación general)

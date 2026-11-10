@@ -1039,3 +1039,9 @@ video.is-still { animation: kenburns 18s ease-in-out infinite alternate; }
   .cn .eg-rama-l { left: max(-6vw, calc(50% - 560px)); width: clamp(300px, 34vw, 440px); }
   .cn .eg-rama-r { right: max(-6vw, calc(50% - 560px)); width: clamp(320px, 36vw, 470px); }
 }
+
+/* Vista previa ?flores=grande: matas más grandes */
+.xl .eg-rama { bottom: -3%; }
+.xl .eg-rama-l { left: -8vw; width: 74vw; }
+.xl .eg-rama-r { right: -8vw; width: 80vw; }
+@media (min-width: 761px) { .xl .eg-rama-l { width: clamp(380px, 42vw, 560px); } .xl .eg-rama-r { width: clamp(400px, 44vw, 580px); } }
