@@ -1035,8 +1035,8 @@ video.is-still { animation: kenburns 18s ease-in-out infinite alternate; }
 /* ambiente: nubes arriba, cerezos detrás de ella, flores abajo (sin verde) */
 .cn .cn-cloud { z-index: 0; }
 /* acuarela de cerezo igual que el resto de la tarjeta: ramas desde arriba y matas al pie */
-.cn .cn-h1 { left: -4%; top: 0; width: 64vw; z-index: 1; -webkit-mask-image: linear-gradient(135deg, #000 42%, transparent 74%); mask-image: linear-gradient(135deg, #000 42%, transparent 74%); }
-.cn .cn-h2 { right: -4%; top: 0; width: 64vw; transform: scaleX(-1); z-index: 1; -webkit-mask-image: linear-gradient(135deg, #000 42%, transparent 74%); mask-image: linear-gradient(135deg, #000 42%, transparent 74%); }
+.cn .cn-h1 { left: -4%; top: 0; width: 58vw; z-index: 1; }
+.cn .cn-h2 { right: -4%; top: 0; width: 58vw; transform: scaleX(-1); z-index: 1; }
 .cn .cn-t7 { left: -14%; bottom: -4%; width: 58vw; z-index: 3; filter: drop-shadow(0 8px 14px rgba(140, 60, 90, .22)); }
 .cn .cn-t8 { right: -14%; bottom: -4%; width: 60vw; z-index: 3; filter: drop-shadow(0 8px 14px rgba(140, 60, 90, .22)); }
 .cn .cn-bush-c { bottom: -14%; left: 50%; width: min(56vw, 360px); transform: translateX(-50%); z-index: 3; filter: drop-shadow(0 8px 14px rgba(140, 60, 90, .22)); }
