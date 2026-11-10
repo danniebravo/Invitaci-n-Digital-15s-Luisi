@@ -1025,6 +1025,7 @@ video.is-still { animation: kenburns 18s ease-in-out infinite alternate; }
 .cn-only { display: none; }
 .cn .end { min-height: 0; }
 .cn .eg-banda, .cn .eg-glow { display: none; }
+.cn .end-garden { -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%); mask-image: linear-gradient(180deg, transparent 0, #000 14%); }
 .cn .end-inner { padding-top: 70px; }
 .cn .end-garden { height: min(74svh, 620px); margin-top: 0; }
 .cn .eg-girl { bottom: 0; height: 94%; -webkit-mask-image: none; mask-image: none; z-index: 2; }
@@ -1033,9 +1034,11 @@ video.is-still { animation: kenburns 18s ease-in-out infinite alternate; }
 .cn .cn-only { display: block; position: absolute; height: auto; pointer-events: none; }
 /* ambiente: nubes arriba, cerezos detrás de ella, flores abajo (sin verde) */
 .cn .cn-cloud { z-index: 0; }
-.cn .cn-t5 { left: -24%; bottom: 8%; width: 72vw; z-index: 1; }
-.cn .cn-t6 { right: -24%; bottom: 8%; width: 72vw; transform: scaleX(-1); z-index: 1; }
-.cn .cn-t7 { left: -16%; bottom: -4%; width: 50vw; z-index: 3; filter: drop-shadow(0 8px 14px rgba(120, 50, 80, .25)); }
-.cn .cn-t8 { right: -16%; bottom: -4%; width: 52vw; z-index: 3; filter: drop-shadow(0 8px 14px rgba(120, 50, 80, .25)); }
-@media (min-width: 761px) { .cn .cn-t5 { width: 28vw; left: 0; } .cn .cn-t6 { width: 28vw; right: 0; } .cn .cn-t7 { width: 26vw; left: -3%; } .cn .cn-t8 { width: 27vw; right: -3%; } }
+.cn .cn-t5 { left: -26%; bottom: 30%; width: 56vw; z-index: 1; }
+.cn .cn-t6 { right: -26%; bottom: 30%; width: 56vw; transform: scaleX(-1); z-index: 1; }
+.cn .cn-h1 { left: -18%; top: -3%; width: 54vw; transform: scaleY(-1); z-index: 1; }
+.cn .cn-h2 { right: -18%; top: -3%; width: 56vw; transform: scale(-1, -1); z-index: 1; }
+.cn .cn-t7 { left: -18%; bottom: -4%; width: 56vw; z-index: 3; filter: drop-shadow(0 8px 14px rgba(120, 50, 80, .25)); }
+.cn .cn-t8 { right: -18%; bottom: -4%; width: 58vw; z-index: 3; filter: drop-shadow(0 8px 14px rgba(120, 50, 80, .25)); }
+@media (min-width: 761px) { .cn .cn-t5 { width: 24vw; left: -2%; } .cn .cn-t6 { width: 24vw; right: -2%; } .cn .cn-h1 { width: 22vw; } .cn .cn-h2 { width: 23vw; } .cn .cn-t7 { width: 26vw; left: -3%; } .cn .cn-t8 { width: 27vw; right: -3%; } }
 .cn .foot { position: absolute; left: 50%; transform: translateX(-50%); bottom: 14px; z-index: 5; width: auto; margin: 0; padding: 6px 12px; white-space: nowrap; letter-spacing: .14em; font-size: 10px; border-radius: 999px; background: rgba(168, 57, 94, .82); text-shadow: none; }
