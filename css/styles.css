@@ -1047,6 +1047,7 @@ video.is-still { animation: kenburns 18s ease-in-out infinite alternate; }
 @media (min-width: 761px) { .xl .eg-rama-l { width: clamp(380px, 42vw, 560px); } .xl .eg-rama-r { width: clamp(400px, 44vw, 580px); } }
 
 /* Vista previa ?brillo=1: resplandor rosado circular detrás de ella */
-.gl .eg-glow { display: block; left: 50%; bottom: 10%; width: 120vw; max-width: 620px; height: auto; aspect-ratio: 1; transform: translateX(-50%); z-index: 1; border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 224, 238, .95) 26%, rgba(255, 150, 195, .75) 48%, rgba(255, 110, 175, .35) 64%, rgba(255, 110, 175, 0) 76%); filter: blur(12px); animation: glowPulse 5s ease-in-out infinite; }
+.gl .eg-glow { display: block; left: 50%; bottom: 22%; width: 78vw; max-width: 430px; height: auto; aspect-ratio: 1; transform: translateX(-50%); z-index: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, .95) 0%, rgba(255, 220, 236, .8) 30%, rgba(255, 150, 195, .5) 54%, rgba(255, 120, 180, 0) 74%); filter: blur(10px); animation: glowPulse 5s ease-in-out infinite; }
+.gl .eg-girl { filter: drop-shadow(0 0 14px rgba(255, 190, 220, .95)) drop-shadow(0 0 34px rgba(255, 130, 185, .6)); }
 @keyframes glowPulse { 0%, 100% { opacity: .85; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.06); } }
